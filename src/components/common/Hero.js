@@ -1,8 +1,15 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Hero.css';
 import FloatingPatterns from './FloatingPatterns';
 
 export default function Hero() {
+  const navigate = useNavigate();
+
+  const handleSignupClick = (role) => {
+    navigate(`/signup?role=${role.toLowerCase()}`);
+  };
+
   return (
     <section className="hero-section" style={{ position: 'relative', overflow: 'hidden' }}>
       <FloatingPatterns />
@@ -22,9 +29,24 @@ export default function Hero() {
             A non-profit platform bringing AI-powered, culturally grounded education to every child—because quality learning should be for all.
           </p>
           <div className="hero-cta-group">
-            <button className="hero-cta primary">For Students</button>
-            <button className="hero-cta secondary">For Teachers</button>
-            <button className="hero-cta secondary">For Parents</button>
+            <button 
+              className="hero-cta primary" 
+              onClick={() => handleSignupClick('learner')}
+            >
+              For Students
+            </button>
+            <button 
+              className="hero-cta secondary" 
+              onClick={() => handleSignupClick('teacher')}
+            >
+              For Teachers
+            </button>
+            <button 
+              className="hero-cta secondary" 
+              onClick={() => handleSignupClick('parent')}
+            >
+              For Parents
+            </button>
           </div>
         </div>
       </div>

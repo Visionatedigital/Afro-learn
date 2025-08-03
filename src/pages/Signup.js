@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { register } from '../services/authService';
 import { useAuth } from '../context/AuthContext';
 import GoogleSignIn from '../components/GoogleSignIn';
@@ -29,11 +29,21 @@ const grades = [
 ];
 
 export default function Signup() {
+  const location = useLocation();
   const [form, setForm] = useState({ email: '', password: '', name: '', role: 'learner' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
+
+  // Handle URL parameters to pre-select role
+  useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
+    const roleParam = searchParams.get('role');
+    if (roleParam && ['learner', 'teacher', 'parent'].includes(roleParam.toLowerCase())) {
+      setForm(prev => ({ ...prev, role: roleParam.toLowerCase() }));
+    }
+  }, [location.search]);
 
   const handleChange = e => {
     setForm(f => ({ ...f, [e.target.name]: e.target.value }));
