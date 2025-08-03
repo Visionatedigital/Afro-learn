@@ -1,0 +1,18 @@
+'Log files:
+C:\Users\LUBS\Desktop\Afro-learn\afro-learn\npm-cache\_logs\2025-07-10T18_33_37_373Z-debug-0.log
+
+# npm resolution error report
+
+While resolving: afro-learn@0.1.0
+Found: eslint@9.30.1
+node_modules/eslint
+  eslint@"^9.30.1" from the root project
+
+Could not resolve dependency:
+peer eslint@"^8.0.0" from eslint-config-react-app@7.0.1
+node_modules/eslint-config-react-app
+  eslint-config-react-app@"*" from the root project
+
+Fix the upstream dependency conflict, or retry
+this command with --force or --legacy-peer-deps
+to accept an incorrect (and potentially broken) dependency resolution.

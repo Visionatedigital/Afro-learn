@@ -1,0 +1,289 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int      @id @default(autoincrement())
+  email      String   @unique
+  password   String?
+  name       String
+  role       String   @default("learner")
+  country    String?
+  grade      String?
+  birthMonth String?
+  birthYear  String?
+  picture    String?
+  googleId   String?
+  createdAt  DateTime @default(now())
+  enrollments Enrollment[]
+  userSubjects UserSubject[]
+  teachingClasses Class[] @relation("TeacherClasses")
+  progress   Progress[]
+  communityMemberships CommunityMembership[]
+  communityPosts CommunityPost[]
+  communityReplies CommunityReply[]
+  sentEncouragements CommunityEncouragement[] @relation("EncouragementSender")
+  receivedEncouragements CommunityEncouragement[] @relation("EncouragementRecipient")
+  sentFriendRequests    Friendship[] @relation("UserFriendships")
+  receivedFriendRequests Friendship[] @relation("FriendUser")
+  notifications Notification[]
+  activities Activity[]
+  attendances Attendance[]
+}
+
+model Grade {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  units     Unit[]
+  createdAt DateTime @default(now())
+}
+
+model Subject {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  icon      String?
+  units     Unit[]
+  createdAt DateTime @default(now())
+  userSubjects UserSubject[]
+  progress  Progress[]
+}
+
+model UserSubject {
+  id        Int    @id @default(autoincrement())
+  user      User   @relation(fields: [userId], references: [id])
+  userId    Int
+  subject   Subject @relation(fields: [subjectId], references: [id])
+  subjectId Int
+  addedAt   DateTime @default(now())
+  @@unique([userId, subjectId])
+}
+
+model Unit {
+  id         Int      @id @default(autoincrement())
+  name       String
+  subject    Subject  @relation(fields: [subjectId], references: [id])
+  subjectId  Int
+  grade      Grade    @relation(fields: [gradeId], references: [id])
+  gradeId    Int
+  lessons    Lesson[]
+  createdAt  DateTime @default(now())
+  progressUnits ProgressUnit[]
+}
+
+model Lesson {
+  id        Int      @id @default(autoincrement())
+  name      String
+  videoUrl  String?
+  content   String?
+  unit      Unit     @relation(fields: [unitId], references: [id])
+  unitId    Int
+  createdAt DateTime @default(now())
+  progressVideos ProgressVideo[]
+  progressQuizzes ProgressQuiz[]
+  progressPractices ProgressPractice[]
+}
+
+model Class {
+  id          Int          @id @default(autoincrement())
+  name        String
+  subject     String
+  grade       String
+  teacherId   Int?
+  teacher     User?        @relation("TeacherClasses", fields: [teacherId], references: [id])
+  enrollments Enrollment[]
+  createdAt   DateTime     @default(now())
+  assignments Assignment[]
+  activities  Activity[]
+  attendances Attendance[]
+}
+
+model Enrollment {
+  id        Int    @id @default(autoincrement())
+  user      User   @relation(fields: [userId], references: [id])
+  userId    Int
+  class     Class  @relation(fields: [classId], references: [id])
+  classId   Int
+  joinedAt  DateTime @default(now())
+  status    String   @default("pending") // new field for approval
+  @@unique([userId, classId])
+}
+
+model Progress {
+  id         Int      @id @default(autoincrement())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
+  subject    Subject  @relation(fields: [subjectId], references: [id])
+  subjectId  Int
+  level      Int      @default(1)
+  skillsMastered Int  @default(0)
+  totalSkills    Int  @default(0)
+  percent    Int      @default(0)
+  updatedAt  DateTime @updatedAt
+  units      ProgressUnit[]
+}
+
+model ProgressUnit {
+  id         Int      @id @default(autoincrement())
+  progress   Progress @relation(fields: [progressId], references: [id])
+  progressId Int
+  unit       Unit     @relation(fields: [unitId], references: [id])
+  unitId     Int
+  completed  Boolean  @default(false)
+  videos     ProgressVideo[]
+  quizzes    ProgressQuiz[]
+  practices  ProgressPractice[]
+}
+
+model ProgressVideo {
+  id         Int      @id @default(autoincrement())
+  progressUnit ProgressUnit @relation(fields: [progressUnitId], references: [id])
+  progressUnitId Int
+  lesson     Lesson   @relation(fields: [lessonId], references: [id])
+  lessonId   Int
+  completed  Boolean  @default(false)
+  completedAt DateTime?
+}
+
+model ProgressQuiz {
+  id         Int      @id @default(autoincrement())
+  progressUnit ProgressUnit @relation(fields: [progressUnitId], references: [id])
+  progressUnitId Int
+  lesson     Lesson   @relation(fields: [lessonId], references: [id])
+  lessonId   Int
+  score      Int?
+  total      Int?
+  passed     Boolean  @default(false)
+  attempts   Int      @default(0)
+  lastAttemptAt DateTime?
+}
+
+model ProgressPractice {
+  id         Int      @id @default(autoincrement())
+  progressUnit ProgressUnit @relation(fields: [progressUnitId], references: [id])
+  progressUnitId Int
+  lesson     Lesson   @relation(fields: [lessonId], references: [id])
+  lessonId   Int
+  completed  Boolean  @default(false)
+  completedAt DateTime?
+}
+
+model CommunityGroup {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  members     CommunityMembership[]
+  posts       CommunityPost[]
+  encouragements CommunityEncouragement[]
+}
+
+model CommunityMembership {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  group     CommunityGroup @relation(fields: [groupId], references: [id])
+  groupId   Int
+  joinedAt  DateTime @default(now())
+  role      String   @default("member")
+  @@unique([userId, groupId])
+}
+
+model CommunityPost {
+  id        Int      @id @default(autoincrement())
+  group     CommunityGroup @relation(fields: [groupId], references: [id])
+  groupId   Int
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  content   String
+  createdAt DateTime @default(now())
+  replies   CommunityReply[]
+}
+
+model CommunityReply {
+  id        Int      @id @default(autoincrement())
+  post      CommunityPost @relation(fields: [postId], references: [id])
+  postId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  content   String
+  createdAt DateTime @default(now())
+}
+
+model CommunityEncouragement {
+  id           Int      @id @default(autoincrement())
+  group        CommunityGroup @relation(fields: [groupId], references: [id])
+  groupId      Int
+  sender       User     @relation("EncouragementSender", fields: [senderId], references: [id])
+  senderId     Int
+  recipient    User     @relation("EncouragementRecipient", fields: [recipientId], references: [id])
+  recipientId  Int
+  message      String
+  type         String   @default("general") // e.g., praise, motivation, etc.
+  createdAt    DateTime @default(now())
+}
+
+model Friendship {
+  id        Int    @id @default(autoincrement())
+  user      User   @relation("UserFriendships", fields: [userId], references: [id])
+  userId    Int
+  friend    User   @relation("FriendUser", fields: [friendId], references: [id])
+  friendId  Int
+  status    String @default("accepted") // could be: pending, accepted, blocked
+  createdAt DateTime @default(now())
+
+  @@unique([userId, friendId])
+}
+
+model Notification {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  type      String   // e.g., 'friend_request', 'class_approved', 'level_up', etc.
+  message   String
+  link      String?
+  read      Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model Assignment {
+  id        Int      @id @default(autoincrement())
+  title     String
+  dueDate   DateTime
+  class     Class    @relation(fields: [classId], references: [id])
+  classId   Int
+  createdAt DateTime @default(now())
+}
+
+model Activity {
+  id        Int      @id @default(autoincrement())
+  type      String   // e.g., 'lesson_completed', 'homework_submitted', 'streak'
+  text      String   // Human-readable description
+  icon      String   // e.g., 'trophy', 'tasks', 'user-check'
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  class     Class?   @relation(fields: [classId], references: [id])
+  classId   Int?
+  createdAt DateTime @default(now())
+}
+
+model Attendance {
+  id        Int      @id @default(autoincrement())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    Int
+  class     Class    @relation(fields: [classId], references: [id])
+  classId   Int
+  date      DateTime
+  present   Boolean
+  createdAt DateTime @default(now())
+}

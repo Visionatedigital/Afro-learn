@@ -1,0 +1,242 @@
+.afrolearn-cta-minimal {
+  position: relative;
+  width: 100%;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 5rem 0 6rem 0;
+  overflow: hidden;
+}
+
+.cta-content-minimal {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cta-heading-minimal {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+}
+
+.cta-buttons-minimal {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 320px;
+  max-width: 90vw;
+}
+
+.cta-btn-minimal {
+  width: 100%;
+  padding: 1.1rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  background: #1e5a3a;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+  box-shadow: none;
+  letter-spacing: 0.5px;
+}
+
+.cta-btn-minimal:hover {
+  background: #17472d;
+  transform: translateY(-2px) scale(1.01);
+}
+
+/* Motif images - more central and more visible */
+.cta-motif {
+  position: absolute;
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  filter: none;
+}
+
+.motif-main {
+  left: 50%;
+  top: 50%;
+  width: 220px;
+  max-width: 60vw;
+  transform: translate(-50%, -50%);
+  opacity: 0.45;
+}
+
+.motif-bottom-left {
+  left: 38%;
+  top: 62%;
+  width: 120px;
+  max-width: 30vw;
+  opacity: 0.32;
+  transform: translate(-50%, -50%);
+}
+
+.motif-bottom-right {
+  left: 62%;
+  top: 62%;
+  width: 110px;
+  max-width: 28vw;
+  opacity: 0.32;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 600px) {
+  .cta-heading-minimal {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .cta-buttons-minimal {
+    width: 100%;
+    gap: 0.8rem;
+  }
+  .motif-main {
+    width: 120px;
+    left: 50%;
+    top: 48%;
+  }
+  .motif-bottom-left {
+    width: 70px;
+    left: 42%;
+    top: 70%;
+  }
+  .motif-bottom-right {
+    width: 65px;
+    left: 58%;
+    top: 70%;
+  }
+} 
+.cta-button.secondary {
+  background: linear-gradient(135deg, #d2691e 0%, #cd853f 100%);
+  color: white;
+  box-shadow: 0 8px 20px rgba(210, 105, 30, 0.3);
+}
+
+.cta-button.secondary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(210, 105, 30, 0.4);
+}
+
+.cta-button.tertiary {
+  background: linear-gradient(135deg, #daa520 0%, #b8860b 100%);
+  color: white;
+  box-shadow: 0 8px 20px rgba(218, 165, 32, 0.3);
+}
+
+.cta-button.tertiary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(218, 165, 32, 0.4);
+}
+
+.cta-button.accent {
+  background: linear-gradient(135deg, #ff8c00 0%, #ffa500 100%);
+  color: white;
+  box-shadow: 0 8px 20px rgba(255, 140, 0, 0.3);
+}
+
+.cta-button.accent:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(255, 140, 0, 0.4);
+}
+
+/* Decorative Afro-inspired motifs */
+.decorative-elements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.motif {
+  position: absolute;
+  opacity: 0.1;
+  animation: float 6s ease-in-out infinite;
+}
+
+.motif-1 {
+  top: 10%;
+  left: 10%;
+  width: 100px;
+  height: 100px;
+  background: radial-gradient(circle, #8b4513 0%, transparent 70%);
+  border-radius: 50%;
+  animation-delay: 0s;
+}
+
+.motif-2 {
+  top: 60%;
+  right: 15%;
+  width: 80px;
+  height: 80px;
+  background: radial-gradient(circle, #d2691e 0%, transparent 70%);
+  border-radius: 50%;
+  animation-delay: 2s;
+}
+
+.motif-3 {
+  bottom: 20%;
+  left: 20%;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, #daa520 0%, transparent 70%);
+  border-radius: 50%;
+  animation-delay: 4s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .cta-title {
+    font-size: 2.5rem;
+  }
+  
+  .cta-subtitle {
+    font-size: 1.1rem;
+  }
+  
+  .cta-content {
+    padding: 2rem;
+  }
+  
+  .cta-button {
+    padding: 0.9rem 1.8rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .cta-title {
+    font-size: 2rem;
+  }
+  .cta-subtitle {
+    font-size: 1rem;
+  }
+  .cta-content {
+    padding: 1.5rem;
+  }
+  .cta-buttons {
+    max-width: 100%;
+  }
+} 

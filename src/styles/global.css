@@ -1,0 +1,852 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900&display=swap');
+
+:root {
+  --color-bg: #fcf8f8;
+  --color-primary: #2bb6bb; /* Teal from logo */
+  --color-accent: #e82630;  /* Coral/Red from logo */
+  --color-yellow: #ffd24a;  /* Yellow from logo */
+  --color-dark: #3a4046;    /* Dark gray from logo */
+  --color-muted: #f3e7e8;   /* Light pinkish background */
+  --color-text: #1b0e0f;
+  --color-secondary: #974e52;
+}
+
+body {
+  font-family: 'Lexend', 'Noto Sans', Arial, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+body.dark-theme {
+  background: #181c1f !important;
+  color: #f7f6f2 !important;
+}
+
+body.dark-theme input,
+body.dark-theme textarea,
+body.dark-theme select {
+  background: #23272b !important;
+  color: #f7f6f2 !important;
+  border-color: #444 !important;
+}
+
+body.dark-theme .afl-navbar,
+body.dark-theme .afl-navbar-inner,
+body.dark-theme .afl-navbar-center,
+body.dark-theme .afl-navbar-left,
+body.dark-theme .afl-navbar-right {
+  background: #23272b !important;
+  color: #f7f6f2 !important;
+}
+
+body.dark-theme .afl-user-menu,
+body.dark-theme .afl-dropdown-menu,
+body.dark-theme .afl-mobile-menu {
+  background: #23272b !important;
+  color: #f7f6f2 !important;
+}
+
+body.dark-theme .afl-logo-text,
+body.dark-theme .afl-login,
+body.dark-theme .afl-signup,
+body.dark-theme .afl-donate {
+  color: #ffe082 !important;
+}
+
+body.dark-theme button {
+  background: #2bb6bb !important;
+  color: #fff !important;
+  border-color: #2bb6bb !important;
+}
+
+body.dark-theme a {
+  color: #ffe082 !important;
+}
+
+body.dark-theme .afl-search input {
+  background: #23272b !important;
+  color: #f7f6f2 !important;
+  border-color: #444 !important;
+}
+
+body.dark-theme .afl-search button {
+  background: #2bb6bb !important;
+  color: #fff !important;
+}
+
+/* Add more dark theme overrides as needed for your UI */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lexend', Arial, sans-serif;
+  color: var(--color-dark);
+  margin-top: 0;
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a:hover {
+  color: var(--color-accent);
+}
+
+button {
+  font-family: 'Lexend', Arial, sans-serif;
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  background: var(--color-accent);
+  color: var(--color-bg);
+  transition: background 0.2s;
+}
+button.secondary {
+  background: var(--color-muted);
+  color: var(--color-dark);
+}
+button:hover {
+  background: var(--color-primary);
+  color: var(--color-bg);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.card {
+  background: var(--color-bg);
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(58, 64, 70, 0.04);
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* Utility classes */
+.text-accent { color: var(--color-accent); }
+.text-primary { color: var(--color-primary); }
+.text-yellow { color: var(--color-yellow); }
+.text-dark { color: var(--color-dark); }
+.bg-muted { background: var(--color-muted); }
+.rounded { border-radius: 1rem; }
+.shadow { box-shadow: 0 2px 8px rgba(58, 64, 70, 0.04); } 
+
+.courses-title {
+  font-family: 'Lexend', 'Noto Sans', Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--color-accent, #ffb300);
+  margin-bottom: 2rem;
+  text-align: center;
+  letter-spacing: -1px;
+}
+
+.courses-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.course-card {
+  background: #fff;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem 1rem 1.2rem 1rem;
+  transition: transform 0.18s, box-shadow 0.18s;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+.course-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  border-color: var(--color-accent, #ffb300);
+}
+
+.course-img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: #f3f4f6;
+  background-size: cover;
+  background-position: center;
+  border-radius: 1rem;
+  margin-bottom: 1.1rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+}
+
+.course-title {
+  font-family: 'Lexend', 'Noto Sans', Arial, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.course-desc {
+  font-family: 'Noto Sans', Arial, sans-serif;
+  color: #3b3b3b;
+  font-size: 1rem;
+  text-align: center;
+  margin-bottom: 0;
+}
+
+@media (max-width: 600px) {
+  .courses-title {
+    font-size: 1.3rem;
+  }
+  .courses-grid {
+    gap: 1.1rem;
+  }
+  .course-card {
+    padding: 1rem 0.5rem 0.8rem 0.5rem;
+  }
+  .course-title {
+    font-size: 1rem;
+  }
+  .course-desc {
+    font-size: 0.92rem;
+  }
+} 
+
+@media (max-width: 768px) {
+  .afl-profile-mobile {
+    display: block !important;
+    margin-bottom: 1.5rem;
+  }
+  .afl-profile-desktop {
+    display: none !important;
+  }
+  .courses-grid, .afl-courses-grid {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 1rem !important;
+    margin-bottom: 2rem !important;
+  }
+  .course-card, .afl-course-card {
+    min-width: 0 !important;
+    width: 100% !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 2px 8px #ececec !important;
+    padding: 1.2rem 0.7rem !important;
+    font-size: 1rem !important;
+    margin: 0 !important;
+    touch-action: manipulation;
+  }
+  .afl-cultural-section {
+    width: 100% !important;
+    max-width: 100vw !important;
+    margin: 1.5rem 0 !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 2px 8px #ffe082 !important;
+    padding: 1.2rem 1rem !important;
+  }
+  .afl-cultural-scroll {
+    overflow-x: auto !important;
+    display: flex !important;
+    gap: 1rem !important;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  .afl-cultural-card {
+    min-width: 90vw !important;
+    scroll-snap-align: start;
+  }
+  .afl-dashboard-main {
+    padding: 1rem 0.5rem !important;
+  }
+  .afl-topbar-mobile {
+    display: flex !important;
+  }
+  .sidebar, .sidebar-nav, .afl-navbar, .afl-navbar-inner {
+    display: none !important;
+  }
+  .afl-mobile-nav-drawer {
+    box-shadow: 2px 0 16px rgba(0,0,0,0.08);
+    animation: slideInLeft 0.2s;
+  }
+  .afl-mobile-nav-overlay {
+    background: rgba(0,0,0,0.32);
+    z-index: 200;
+  }
+  .afl-mobile-nav-link.active {
+    background: #f7f7fa;
+    color: #2bb6bb !important;
+  }
+  .afl-topbar-spacer {
+    height: 1.2rem;
+    width: 100%;
+    display: block;
+  }
+  .progress-page-main {
+    padding: 1rem 0.2rem !important;
+  }
+  .progress-page-main > div {
+    flex-direction: column !important;
+    align-items: stretch !important;
+    gap: 1rem !important;
+  }
+  .progress-page-main .afl-topbar-spacer {
+    height: 1.2rem;
+  }
+  .progress-page-main [style*='grid'] {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1rem !important;
+    max-width: 100vw !important;
+  }
+  .progress-page-main [style*='box-shadow'] {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    margin: 0 auto 1rem auto !important;
+    padding: 1rem 0.7rem !important;
+    font-size: 1rem !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 2px 8px #ececec !important;
+    touch-action: manipulation;
+  }
+  .progress-page-main [style*='position: absolute'] {
+    left: 0 !important;
+    width: 100vw !important;
+    min-width: 0 !important;
+    max-width: 100vw !important;
+    border-radius: 0 0 1rem 1rem !important;
+    box-shadow: 0 2px 8px #ddd !important;
+    padding: 0.7rem 0.5rem !important;
+  }
+  .profile-page-main {
+    padding: 0.2rem 0.2rem 1.5rem 0.2rem !important;
+    max-width: 100vw !important;
+  }
+  .profile-page-main > * {
+    width: 100% !important;
+    max-width: 100vw !important;
+    margin: 0 auto 1.2rem auto !important;
+  }
+  .profile-page-main .afl-topbar-spacer {
+    height: 1rem;
+  }
+  .profile-page-main [style*='box-shadow'] {
+    max-width: 100% !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    margin: 0 auto 1rem auto !important;
+    padding: 1rem 0.7rem !important;
+    font-size: 1rem !important;
+    border-radius: 1rem !important;
+    box-shadow: 0 2px 8px #ececec !important;
+    touch-action: manipulation;
+  }
+  .community-page-main {
+    padding: 0.2rem 0.2rem 1.5rem 0.2rem !important;
+    max-width: 100vw !important;
+  }
+  .community-page-main > * {
+    width: 100% !important;
+    max-width: 100vw !important;
+    margin: 0 auto 1.2rem auto !important;
+  }
+  .community-page-main .afl-topbar-spacer {
+    height: 1rem;
+  }
+  .community-page-main [style*='display: flex'][style*='gap: 18'][style*='marginBottom: 24'] {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+    margin-bottom: 1rem !important;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+  }
+  .community-page-main .afl-leaderboard-container,
+  .community-page-main [style*='maxWidth: 700'] {
+    max-width: 100vw !important;
+    padding: 0.7rem 0.2rem !important;
+    font-size: 0.95rem !important;
+  }
+  .community-page-main .afl-leaderboard-row,
+  .community-page-main [style*='display: flex'][style*='alignItems: center'][style*='gap: 18'] {
+    font-size: 0.95rem !important;
+    padding: 0.5rem 0.2rem !important;
+    gap: 10px !important;
+  }
+  .community-page-main img[alt*='avatar'] {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+  }
+  .community-page-main span[style*='fontSize: 22'] {
+    font-size: 1.1rem !important;
+    min-width: 28px !important;
+  }
+  .community-page-main span[style*='fontSize: 17'] {
+    font-size: 1rem !important;
+  }
+  .community-page-main span[style*='fontSize: 15'] {
+    font-size: 0.95rem !important;
+  }
+  .community-page-main span[style*='fontSize: 13'] {
+    font-size: 0.85rem !important;
+  }
+  .teachers-mentors-page-main {
+    padding: 0.2rem 0.2rem 1.5rem 0.2rem !important;
+    max-width: 100vw !important;
+  }
+  .teachers-mentors-page-main > * {
+    width: 100% !important;
+    max-width: 100vw !important;
+    margin: 0 auto 1.2rem auto !important;
+  }
+  .teachers-mentors-page-main .afl-topbar-spacer {
+    height: 1rem;
+  }
+  /* TeacherApprovalPanel */
+  .teachers-mentors-page-main [style*='background: #fff9ec'] {
+    padding: 0.7rem 0.5rem !important;
+    border-radius: 1rem !important;
+  }
+  .teachers-mentors-page-main [style*='boxShadow: 0 2px 8px #ffe082'] {
+    box-shadow: 0 1px 4px #ffe082 !important;
+  }
+  .teachers-mentors-page-main [style*='display: flex'][style*='alignItems: center'][style*='gap: 16'] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.5rem !important;
+    padding: 0.7rem 0.5rem !important;
+  }
+  .teachers-mentors-page-main img[alt*='Teacher'],
+  .teachers-mentors-page-main img[alt*='avatar'] {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+  }
+  .teachers-mentors-page-main button {
+    width: 100% !important;
+    font-size: 1rem !important;
+    margin: 0.2rem 0 !important;
+    padding: 0.6rem 0.7rem !important;
+    border-radius: 0.7rem !important;
+  }
+  /* Teachers/Mentors list */
+  .teachers-mentors-page-main [style*='display: flex'][style*='gap: 18'][style*='flexWrap: wrap'] {
+    flex-direction: column !important;
+    gap: 0.7rem !important;
+    margin-bottom: 0.7rem !important;
+  }
+  .teachers-mentors-page-main [style*='background: #fff'],
+  .teachers-mentors-page-main [style*='background: #fffbe6'] {
+    padding: 0.7rem 0.5rem !important;
+    border-radius: 1rem !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    font-size: 1rem !important;
+  }
+  .teachers-mentors-page-main [style*='fontSize: 16'] {
+    font-size: 1rem !important;
+  }
+  .teachers-mentors-page-main [style*='fontSize: 13'] {
+    font-size: 0.9rem !important;
+  }
+  /* Forms and Add Teacher */
+  .teachers-mentors-page-main form {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+  .teachers-mentors-page-main input,
+  .teachers-mentors-page-main button[type='submit'] {
+    width: 100% !important;
+    font-size: 1rem !important;
+    padding: 0.7rem 0.7rem !important;
+    border-radius: 0.7rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  /* Join a Class Button */
+  .teachers-mentors-page-main [style*='background: #2bb6bb'] {
+    width: 100% !important;
+    font-size: 1.1rem !important;
+    padding: 1rem 0.7rem !important;
+    border-radius: 1rem !important;
+    gap: 10px !important;
+  }
+  /* Add a Teacher section */
+  .teachers-mentors-page-main [style*='background: #fce4ec'] {
+    padding: 0.7rem 0.5rem !important;
+    border-radius: 1rem !important;
+  }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@media (min-width: 769px) {
+  .afl-topbar-mobile {
+    display: none !important;
+  }
+}
+
+/* Hide horizontal scroll for main except swipeable areas */
+body, html, #root {
+  overflow-x: hidden;
+} 
+
+@media (max-width: 768px) {
+  .teachers-mentors-page-main,
+  .teachers-mentors-page-main > *,
+  .teachers-mentors-page-main form,
+  .teachers-mentors-page-main [style*='background: #fce4ec'],
+  .teachers-mentors-page-main [style*='background: #fff'],
+  .teachers-mentors-page-main [style*='background: #fffbe6'] {
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    overflow-x: hidden !important;
+  }
+  .teachers-mentors-page-main input,
+  .teachers-mentors-page-main button[type='submit'] {
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    overflow-x: auto !important;
+    min-width: 0 !important;
+  }
+  .teachers-mentors-page-main,
+  .teachers-mentors-page-main > * {
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+    overflow-x: hidden !important;
+  }
+  .teachers-mentors-page-main form,
+  .teachers-mentors-page-main [style*='background: #fce4ec'],
+  .teachers-mentors-page-main [style*='background: #fff'],
+  .teachers-mentors-page-main [style*='background: #fffbe6'] {
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+  }
+  .teachers-mentors-page-main input,
+  .teachers-mentors-page-main button[type='submit'] {
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+  }
+  /* JoinClassModal popup */
+  .teachers-mentors-page-main .join-class-modal,
+  .teachers-mentors-page-main [style*='maxWidth: 420'][style*='borderRadius: 20'] {
+    width: 98vw !important;
+    max-width: 99vw !important;
+    min-width: 0 !important;
+    padding: 1rem 0.5rem !important;
+    border-radius: 1rem !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+  }
+  .teachers-mentors-page-main input,
+  .teachers-mentors-page-main [style*='fontSize: 32'] {
+    font-size: 1.2rem !important;
+    padding: 0.7rem 0.5rem !important;
+    border-radius: 0.7rem !important;
+    max-width: 95vw !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .teachers-mentors-page-main button,
+  .teachers-mentors-page-main [style*='fontSize: 20'][style*='borderRadius: 14'] {
+    font-size: 1rem !important;
+    padding: 0.7rem 0.5rem !important;
+    border-radius: 0.7rem !important;
+    max-width: 95vw !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+  .teachers-mentors-page-main h2,
+  .teachers-mentors-page-main [style*='fontSize: 26'] {
+    font-size: 1.3rem !important;
+    text-align: center !important;
+  }
+  .teachers-mentors-page-main [style*='fontSize: 16'],
+  .teachers-mentors-page-main [style*='fontSize: 15'] {
+    font-size: 1.1rem !important;
+    text-align: center !important;
+  }
+} 
+
+@media (max-width: 425px) {
+  .settings-page-main {
+    padding: 0.2rem 0.2rem 1.2rem 0.2rem !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+  .settings-page-main > *,
+  .settings-page-main form,
+  .settings-page-main [style*='background: #f7f6f2'],
+  .settings-page-main [style*='background: #fff9ec'],
+  .settings-page-main [style*='background: #e0f7fa'],
+  .settings-page-main [style*='background: #fce4ec'] {
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 0.7rem !important;
+    padding-right: 0.7rem !important;
+    border-radius: 0.7rem !important;
+  }
+  .settings-page-main input,
+  .settings-page-main button,
+  .settings-page-main textarea {
+    font-size: 1rem !important;
+    padding: 0.7rem !important;
+    border-radius: 0.7rem !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    box-sizing: border-box !important;
+    min-width: 0 !important;
+  }
+  .settings-page-main img[alt='Avatar'] {
+    width: 40px !important;
+    height: 40px !important;
+    min-width: 40px !important;
+    min-height: 40px !important;
+  }
+  .settings-page-main h1,
+  .settings-page-main h2 {
+    font-size: 1.3rem !important;
+    text-align: center !important;
+  }
+  .settings-page-main [style*='fontSize: 28'] {
+    font-size: 1.4rem !important;
+  }
+  .settings-page-main [style*='fontSize: 18'] {
+    font-size: 1.1rem !important;
+  }
+  .settings-page-main [style*='padding: 1.5rem'],
+  .settings-page-main [style*='padding: 1.2rem'] {
+    padding: 0.7rem 0.5rem !important;
+  }
+  .settings-page-main [style*='marginBottom: 28'] {
+    margin-bottom: 0.8rem !important;
+  }
+} 
+
+@media (max-width: 600px) {
+  .teachers-mentors-page-main,
+  .teachers-mentors-page-main > *,
+  .teachers-mentors-page-main form,
+  .teachers-mentors-page-main [style*='background: #fce4ec'],
+  .teachers-mentors-page-main [style*='background: #fff'],
+  .teachers-mentors-page-main [style*='background: #fffbe6'] {
+    padding-left: 0.5rem !important;
+    padding-right: 0.5rem !important;
+    border-radius: 0.6rem !important;
+  }
+  .teachers-mentors-page-main input,
+  .teachers-mentors-page-main button[type='submit'] {
+    font-size: 0.98rem !important;
+    padding: 0.6rem !important;
+    border-radius: 0.6rem !important;
+  }
+  .teachers-mentors-page-main img[alt*='Teacher'],
+  .teachers-mentors-page-main img[alt*='avatar'] {
+    width: 28px !important;
+    height: 28px !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
+  }
+  .teachers-mentors-page-main [style*='fontSize: 16'] {
+    font-size: 0.98rem !important;
+  }
+}
+@media (max-width: 500px) {
+  .teachers-mentors-page-main,
+  .teachers-mentors-page-main > *,
+  .teachers-mentors-page-main form,
+  .teachers-mentors-page-main [style*='background: #fce4ec'],
+  .teachers-mentors-page-main [style*='background: #fff'],
+  .teachers-mentors-page-main [style*='background: #fffbe6'] {
+    padding-left: 0.3rem !important;
+    padding-right: 0.3rem !important;
+    border-radius: 0.5rem !important;
+  }
+  .teachers-mentors-page-main input,
+  .teachers-mentors-page-main button[type='submit'] {
+    font-size: 0.95rem !important;
+    padding: 0.5rem !important;
+    border-radius: 0.5rem !important;
+  }
+  .teachers-mentors-page-main img[alt*='Teacher'],
+  .teachers-mentors-page-main img[alt*='avatar'] {
+    width: 24px !important;
+    height: 24px !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
+  }
+  .teachers-mentors-page-main [style*='fontSize: 16'] {
+    font-size: 0.95rem !important;
+  }
+}
+@media (max-width: 375px) {
+  .teachers-mentors-page-main,
+  .teachers-mentors-page-main > *,
+  .teachers-mentors-page-main form,
+  .teachers-mentors-page-main [style*='background: #fce4ec'],
+  .teachers-mentors-page-main [style*='background: #fff'],
+  .teachers-mentors-page-main [style*='background: #fffbe6'] {
+    padding-left: 0.1rem !important;
+    padding-right: 0.1rem !important;
+    border-radius: 0.3rem !important;
+  }
+  .teachers-mentors-page-main input,
+  .teachers-mentors-page-main button[type='submit'] {
+    font-size: 0.9rem !important;
+    padding: 0.4rem !important;
+    border-radius: 0.3rem !important;
+  }
+  .teachers-mentors-page-main img[alt*='Teacher'],
+  .teachers-mentors-page-main img[alt*='avatar'] {
+    width: 20px !important;
+    height: 20px !important;
+    min-width: 20px !important;
+    min-height: 20px !important;
+  }
+  .teachers-mentors-page-main [style*='fontSize: 16'] {
+    font-size: 0.9rem !important;
+  }
+} 
+
+@media (max-width: 900px) {
+  .unit-lesson-view-main aside,
+  .unit-lesson-view-main main {
+    overflow-x: hidden !important;
+  }
+  .unit-lesson-view-main button,
+  .unit-lesson-view-main main button,
+  .unit-lesson-view-main aside button {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+@media (max-width: 600px) {
+  .unit-lesson-view-main button,
+  .unit-lesson-view-main main button,
+  .unit-lesson-view-main aside button {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+@media (max-width: 500px) {
+  .unit-lesson-view-main button,
+  .unit-lesson-view-main main button,
+  .unit-lesson-view-main aside button {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+@media (max-width: 375px) {
+  .unit-lesson-view-main button,
+  .unit-lesson-view-main main button,
+  .unit-lesson-view-main aside button {
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+} 
+
+@media (max-width: 900px) {
+  .lesson-content-comments-form,
+  .lesson-content-comments-form[style*='display: flex'] {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+  }
+  .lesson-content-comments-form input,
+  .lesson-content-comments-form button {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+@media (max-width: 600px) {
+  .lesson-content-comments-form,
+  .lesson-content-comments-form[style*='display: flex'] {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+  }
+  .lesson-content-comments-form input,
+  .lesson-content-comments-form button {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+@media (max-width: 500px) {
+  .lesson-content-comments-form,
+  .lesson-content-comments-form[style*='display: flex'] {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+  }
+  .lesson-content-comments-form input,
+  .lesson-content-comments-form button {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+}
+@media (max-width: 375px) {
+  .lesson-content-comments-form,
+  .lesson-content-comments-form[style*='display: flex'] {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    width: 100% !important;
+  }
+  .lesson-content-comments-form input,
+  .lesson-content-comments-form button {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+} 

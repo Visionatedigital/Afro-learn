@@ -1,0 +1,44 @@
+# Technical Architecture
+- Modular React frontend (web/mobile)
+- AI backend (OpenAI, local LLM, or custom)
+- Voice-to-text and text-to-speech integration
+- Content schema for cultural/localization tagging
+- Offline-first data model and caching
+- Gamification and progress tracking modules
+- Parent/teacher dashboard modules
+
+# Development Roadmap
+## MVP Requirements
+- AfroBuddy chat UI (voice + text)
+- Basic AI tutor integration (Socratic, hint-based)
+- Culturally relevant content library (names, stories, analogies)
+- Parent dashboard: progress report, tips
+- Teacher dashboard: class progress, lesson generator
+- Progress tracker and streaks
+- Mobile-first UI
+
+## Future Enhancements
+- Animated AfroBuddy and interactive illustrations
+- Multilingual support (Swahili, Luganda, Yoruba, etc.)
+- Downloadable/offline lesson packages
+- Advanced gamification (quests, unlockables)
+- Teacher lesson planning AI
+- Parent AI tutor for home support
+
+# Logical Dependency Chain
+- Foundation: AfroBuddy chat UI, AI integration, content schema
+- Progress tracker and dashboards
+- Gamification and cultural content
+- Offline/low-data mode
+- Advanced features (animation, multilingual, lesson planning)
+
+# Risks and Mitigations
+- Voice tech reliability: Use fallback to text, test on low-end devices
+- Content/cultural accuracy: Involve local educators, advisors
+- Data privacy: Strict compliance, local storage for offline
+- Bandwidth: Optimize assets, offer offline/cached modes
+
+# Appendix
+- Research: Khanmigo, ChatGPT, LearnLM feature analysis
+- Technical: Library options for voice, offline, gamification
+- User feedback: Pilot with students/teachers/parents 

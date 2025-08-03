@@ -1,0 +1,42 @@
+.floating-patterns {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+.pattern {
+  position: absolute;
+  width: 48px; height: 48px;
+  opacity: 0.7;
+  animation: float 8s infinite ease-in-out, rotate 16s infinite linear;
+}
+.pattern1 { left: 8%; top: 12%; animation-delay: 0s, 0s; }
+.pattern2 { left: 80%; top: 18%; animation-delay: 2s, 3s; }
+.pattern3 { left: 15%; top: 70%; animation-delay: 1.5s, 2s; }
+.pattern4 { left: 60%; top: 80%; animation-delay: 3s, 1s; }
+.pattern5 { left: 90%; top: 60%; animation-delay: 4s, 2.5s; }
+.pattern6 { left: 35%; top: 85%; animation-delay: 2.5s, 4s; }
+
+@keyframes float {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-30px) scale(1.1); }
+  100% { transform: translateY(0) scale(1); }
+}
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@media (max-width: 900px) {
+  .pattern {
+    width: 32px; height: 32px;
+  }
+}
+@media (max-width: 600px) {
+  .pattern {
+    width: 20px; height: 20px;
+  }
+} 
+ 
+ 
+ 
