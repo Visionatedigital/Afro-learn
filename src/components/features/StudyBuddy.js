@@ -4,7 +4,7 @@ import Mascot3DViewer from './Mascot3DViewer';
 
 const mascotList = [
   { key: 'owl', name: 'Ollie the Owl', emoji: '🦉' },
-  { key: 'robot', name: 'Robo Buddy', emoji: '🤖' },
+  // removed robot option per request
   { key: 'bear', name: 'Bella the Bear', emoji: '🐻' },
   { key: 'lion', name: 'Leo the Lion', emoji: '🦁' },
   { key: 'rabbit', name: 'Ruby the Rabbit', emoji: '🐰' },
@@ -25,7 +25,9 @@ const actionButtons = [
 
 export default function StudyBuddy() {
   const [selectedMascot, setSelectedMascot] = useState(() => {
-    return localStorage.getItem('studyBuddyMascot') || '';
+    const saved = localStorage.getItem('studyBuddyMascot') || '';
+    // if previously set to robot, clear it
+    return saved === 'robot' ? '' : saved;
   });
   const [messages, setMessages] = useState([
     { from: 'mascot', text: "Hi! I'm your Study Buddy. What would you like to do today?" }

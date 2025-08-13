@@ -4,12 +4,10 @@ import ProfileHeader from '../../src/components/layout/ProfileHeader';
 import CourseGrid from '../../src/components/layout/CourseGrid';
 import CulturalSection from '../../src/components/layout/CulturalSection';
 import TopBar from '../../src/components/layout/TopBar';
-import StudyBuddy from '../components/features/StudyBuddy';
 
 const DashboardPage = () => {
   const [selectedUnitView, setSelectedUnitView] = useState(null);
   const [initialLessonId, setInitialLessonId] = useState(null);
-  const [initialUnitView, setInitialUnitView] = useState(null);
   const [initialLesson, setInitialLesson] = useState(null);
   const [initialUnit, setInitialUnit] = useState(null);
   const [initialSubject, setInitialSubject] = useState(null);
@@ -23,12 +21,10 @@ const DashboardPage = () => {
         setInitialUnit(location.state.unit);
         setInitialSubject(location.state.subject);
         setInitialGrade(location.state.grade);
-        setInitialUnitView({ subject: location.state.subject, grade: location.state.grade });
         setSelectedUnitView({ subject: location.state.subject, grade: location.state.grade });
       } else if (location.state.lessonId) {
         const lessonId = location.state.lessonId;
         setInitialLessonId(lessonId);
-        // Fallback: fetch context as before
         fetch(`/api/lesson/${lessonId}`)
           .then(res => res.json())
           .then(lesson => {
@@ -46,7 +42,6 @@ const DashboardPage = () => {
                       .then(grades => {
                         const grade = Array.isArray(grades) ? grades.find(g => g.id === unit.gradeId) : null;
                         if (subject && grade) {
-                          setInitialUnitView({ subject, grade });
                           setSelectedUnitView({ subject, grade });
                         }
                       });
@@ -75,13 +70,8 @@ const DashboardPage = () => {
         />
       </div>
       {!selectedUnitView && (
-        <div style={{ display: 'flex', gap: 32, alignItems: 'flex-start', margin: '2rem 0' }}>
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <CulturalSection />
-          </div>
-          <div style={{ flex: 1, minWidth: 0, maxWidth: 420 }}>
-            <StudyBuddy />
-          </div>
+        <div style={{ margin: '2rem 0' }}>
+          <CulturalSection />
         </div>
       )}
     </>

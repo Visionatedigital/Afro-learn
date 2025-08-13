@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FaChalkboardTeacher, FaUsers, FaBook, FaRegLightbulb, FaHome, FaChevronRight, FaTasks, FaTrophy, FaUserCheck, FaPlus, FaEdit, FaArchive, FaEye, FaExclamationTriangle, FaMapSigns, FaCalendarAlt, FaBullseye, FaUsersCog, FaRocket, FaQuestionCircle, FaBookOpen, FaPalette, FaPenFancy, FaMicrophoneAlt, FaArrowUp, FaArrowDown, FaHome as FaHomeAlt, FaComments, FaHandsHelping, FaRegClock, FaCheckCircle, FaLightbulb, FaUserGraduate, FaStar, FaChalkboard, FaGlobeAfrica, FaLanguage, FaUserFriends, FaRegSmile, FaRegCommentDots, FaRegCheckCircle, FaRegStar, FaRegSun, FaRegHeart, FaRegEdit, FaRegFileAlt, FaRegListAlt, FaRegCalendarAlt, FaRegBell, FaRegEnvelope, FaRegQuestionCircle, FaRegThumbsUp, FaRegThumbsDown, FaRegPaperPlane, FaRegClipboard, FaRegChartBar, FaRegFlag, FaRegGrinStars, FaRegGrinHearts, FaRegGrinBeam, FaRegGrinAlt, FaRegGrinSquint, FaRegGrinTongue, FaRegGrinWink, FaRegLaugh, FaRegLaughBeam, FaRegLaughSquint, FaRegLaughWink, FaRegMeh, FaRegMehBlank, FaRegMehRollingEyes, FaRegSadCry, FaRegSadTear, FaRegSmileBeam, FaRegSmileWink, FaRegSurprise, FaRegTired } from 'react-icons/fa';
+import { FaChalkboardTeacher, FaUsers, FaBook, FaRegLightbulb, FaHome, FaChevronRight, FaTasks, FaTrophy, FaUserCheck, FaPlus, FaEdit, FaArchive, FaEye, FaExclamationTriangle } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
-import LessonRoadmap from './LessonRoadmap';
 
 const tabs = [
   { key: 'overview', label: 'Overview', icon: <FaHome /> },
@@ -66,153 +65,44 @@ export default function TeacherDashboard() {
   const [studentsLoading, setStudentsLoading] = useState(false);
   const [studentsError, setStudentsError] = useState(null);
   const [aiTab, setAiTab] = useState('plan');
-  const [showLessonRoadmap, setShowLessonRoadmap] = useState(false);
 
   const aiTools = {
     plan: [
-      {
-        name: 'Lesson Roadmap',
-        description: 'Generate a step-by-step lesson plan tailored to your objectives.',
-        icon: <FaMapSigns style={{ color: '#2bb6bb', fontSize: 32 }} />,
-      },
-      {
-        name: 'Weekly Guide',
-        description: 'Create a week-long teaching guide for your class.',
-        icon: <FaCalendarAlt style={{ color: '#ff9800', fontSize: 32 }} />,
-      },
-      {
-        name: 'Learning Target Builder',
-        description: 'Craft clear, measurable learning targets for your lessons.',
-        icon: <FaBullseye style={{ color: '#4caf50', fontSize: 32 }} />,
-      },
-      {
-        name: 'Group Work Planner',
-        description: 'Organize collaborative group activities and roles.',
-        icon: <FaUsersCog style={{ color: '#7c4dff', fontSize: 32 }} />,
-      },
-      {
-        name: 'Quick Planner',
-        description: 'Rapidly generate a lesson outline for any topic.',
-        icon: <FaRocket style={{ color: '#e91e63', fontSize: 32 }} />,
-      },
+      'Lesson Roadmap',
+      'Weekly Guide',
+      'Learning Target Builder',
+      'Group Work Planner',
+      'Quick Planner',
     ],
     create: [
-      {
-        name: 'Quick Quiz Maker',
-        description: 'Instantly create quizzes to assess student understanding.',
-        icon: <FaQuestionCircle style={{ color: '#ff9800', fontSize: 32 }} />,
-      },
-      {
-        name: 'Story Spinner',
-        description: 'Generate creative stories for reading or discussion.',
-        icon: <FaBookOpen style={{ color: '#2bb6bb', fontSize: 32 }} />,
-      },
-      {
-        name: 'Lesson Builder',
-        description: 'Build engaging, standards-aligned lessons in minutes.',
-        icon: <FaChalkboard style={{ color: '#4caf50', fontSize: 32 }} />,
-      },
-      {
-        name: 'Poster Pro',
-        description: 'Design eye-catching educational posters.',
-        icon: <FaPalette style={{ color: '#e91e63', fontSize: 32 }} />,
-      },
-      {
-        name: 'Rhyme Time',
-        description: 'Create fun rhymes and poems for your class.',
-        icon: <FaPenFancy style={{ color: '#7c4dff', fontSize: 32 }} />,
-      },
-      {
-        name: 'AfroArt Prompt',
-        description: 'Get creative prompts for Afrocentric art projects.',
-        icon: <FaPalette style={{ color: '#ff9800', fontSize: 32 }} />,
-      },
-      {
-        name: 'Explain with a Skit',
-        description: 'Turn concepts into short, engaging skits.',
-        icon: <FaMicrophoneAlt style={{ color: '#2bb6bb', fontSize: 32 }} />,
-      },
+      'Quick Quiz Maker',
+      'Story Spinner',
+      'Lesson Builder',
+      'Poster Pro',
+      'Rhyme Time',
+      'AfroArt Prompt',
+      'Explain with a Skit',
     ],
     differentiate: [
-      {
-        name: 'Level Up/Down',
-        description: 'Adjust lesson difficulty for different learners.',
-        icon: <FaArrowUp style={{ color: '#4caf50', fontSize: 32 }} />,
-      },
-      {
-        name: 'Home Helper',
-        description: 'Generate simple explanations for parents to help at home.',
-        icon: <FaHomeAlt style={{ color: '#ff9800', fontSize: 32 }} />,
-      },
-      {
-        name: 'Tailor Talk',
-        description: 'Personalize instructions for individual students.',
-        icon: <FaComments style={{ color: '#2bb6bb', fontSize: 32 }} />,
-      },
-      {
-        name: 'Visual Aid Wizard',
-        description: 'Create visual aids to support diverse learners.',
-        icon: <FaRegLightbulb style={{ color: '#7c4dff', fontSize: 32 }} />,
-      },
-      {
-        name: 'Translate It',
-        description: 'Translate instructions or content for multilingual students.',
-        icon: <FaLanguage style={{ color: '#e91e63', fontSize: 32 }} />,
-      },
+      'Level Up/Down',
+      'Home Helper',
+      'Tailor Talk',
+      'Visual Aid Wizard',
+      'Translate It',
     ],
     support: [
-      {
-        name: 'Parent Talk',
-        description: 'Draft messages to communicate with parents.',
-        icon: <FaUserFriends style={{ color: '#2bb6bb', fontSize: 32 }} />,
-      },
-      {
-        name: 'Teacher Buddy',
-        description: 'Get advice or encouragement from a virtual teacher peer.',
-        icon: <FaRegSmile style={{ color: '#ff9800', fontSize: 32 }} />,
-      },
-      {
-        name: 'Class Whisper',
-        description: 'Receive tips for classroom management and engagement.',
-        icon: <FaRegCommentDots style={{ color: '#4caf50', fontSize: 32 }} />,
-      },
-      {
-        name: 'Time Saver',
-        description: 'Automate routine classroom tasks.',
-        icon: <FaRegClock style={{ color: '#e91e63', fontSize: 32 }} />,
-      },
-      {
-        name: 'Learning Checkpoint',
-        description: 'Quickly check student understanding with formative assessments.',
-        icon: <FaCheckCircle style={{ color: '#7c4dff', fontSize: 32 }} />,
-      },
+      'Parent Talk',
+      'Teacher Buddy',
+      'Class Whisper',
+      'Time Saver',
+      'Learning Checkpoint',
     ],
     learn: [
-      {
-        name: 'Teacher Tips',
-        description: 'Discover new teaching strategies and best practices.',
-        icon: <FaLightbulb style={{ color: '#2bb6bb', fontSize: 32 }} />,
-      },
-      {
-        name: 'Know Your Learner',
-        description: 'Get insights into student learning styles and needs.',
-        icon: <FaUserGraduate style={{ color: '#ff9800', fontSize: 32 }} />,
-      },
-      {
-        name: 'What Works',
-        description: 'See evidence-based methods for effective teaching.',
-        icon: <FaStar style={{ color: '#4caf50', fontSize: 32 }} />,
-      },
-      {
-        name: 'Mini Workshop',
-        description: 'Participate in short, focused professional learning.',
-        icon: <FaChalkboard style={{ color: '#e91e63', fontSize: 32 }} />,
-      },
-      {
-        name: 'Culture Boost',
-        description: 'Incorporate cultural relevance and diversity into lessons.',
-        icon: <FaGlobeAfrica style={{ color: '#7c4dff', fontSize: 32 }} />,
-      },
+      'Teacher Tips',
+      'Know Your Learner',
+      'What Works',
+      'Mini Workshop',
+      'Culture Boost',
     ],
   };
   const aiTabs = [
@@ -294,18 +184,6 @@ export default function TeacherDashboard() {
     setAddForm({ name: '', grade: '', subject: '', students: '' });
     setAddError('');
     setShowAddClassModal(false);
-  };
-
-  const handleToolClick = (toolName) => {
-    if (toolName === 'Lesson Roadmap') {
-      setShowLessonRoadmap(true);
-    } else {
-      alert(`${toolName} functionality coming soon!`);
-    }
-  };
-
-  const handleBackFromRoadmap = () => {
-    setShowLessonRoadmap(false);
   };
 
   // Fetch classes from backend on mount
@@ -425,11 +303,6 @@ export default function TeacherDashboard() {
     { id: 1, text: '3 students need help in Math', action: () => alert('Show students needing help in Math') },
     { id: 2, text: 'Try a new reading challenge', action: () => alert('Show reading challenge') },
   ];
-
-  // If Lesson Roadmap is open, render it
-  if (showLessonRoadmap) {
-    return <LessonRoadmap onBack={handleBackFromRoadmap} />;
-  }
 
   return (
     <div style={{ minHeight: '100vh', background: '#f7f6f2', fontFamily: 'Lexend, Noto Sans, Arial, sans-serif' }}>
@@ -712,38 +585,21 @@ export default function TeacherDashboard() {
               marginTop: 8,
             }}>
               {aiTools[aiTab].map(tool => (
-                <div 
-                  key={tool.name} 
-                  onClick={() => handleToolClick(tool.name)}
-                  style={{
-                    background: '#fff',
-                    borderRadius: 16,
-                    boxShadow: '0 2px 8px #eee',
-                    padding: '2rem 1.5rem',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                    minHeight: 140,
-                    fontWeight: 700,
-                    fontSize: 18,
-                    color: '#2d3a2e',
-                    letterSpacing: 0.2,
-                    position: 'relative',
-                    cursor: 'pointer',
-                    transition: 'transform 0.2s, box-shadow 0.2s',
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 4px 16px #ddd';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 2px 8px #eee';
-                  }}
-                >
-                  <div style={{ marginBottom: 12 }}>{tool.icon}</div>
-                  <div style={{ fontWeight: 700, fontSize: 18, marginBottom: 6 }}>{tool.name}</div>
-                  <div style={{ fontWeight: 400, fontSize: 15, color: '#555', lineHeight: 1.4 }}>{tool.description}</div>
+                <div key={tool} style={{
+                  background: '#fff',
+                  borderRadius: 16,
+                  boxShadow: '0 2px 8px #eee',
+                  padding: '2rem 1.5rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  minHeight: 120,
+                  fontWeight: 700,
+                  fontSize: 18,
+                  color: '#2d3a2e',
+                  letterSpacing: 0.2,
+                }}>
+                  {tool}
                 </div>
               ))}
             </div>

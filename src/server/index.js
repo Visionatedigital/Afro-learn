@@ -18,7 +18,7 @@ const avatarStorage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const ext = path.extname(file.originalname);
-    cb(null, `user-${req.user.id}-${Date.now()}${ext}`);
+    cb(null, `user-${req.user?.id || 'guest'}-${Date.now()}${ext}`);
   }
 });
 const uploadAvatar = multer({ storage: avatarStorage });
@@ -30,6 +30,10 @@ const PORT = process.env.REACT_APP_API_PORT || 3001;
 app.use(cors());
 app.use(express.json());
 app.use('/avatars', express.static(require('path').join(__dirname, '../../avatars')));
+
+// AI routes
+const aiRoutes = require('./routes/aiRoutes');
+app.use('/api/ai', aiRoutes);
 
 // JWT auth middleware
 function authenticateToken(req, res, next) {
@@ -1571,7 +1575,7 @@ app.listen(PORT, () => {
   console.log(`📡 API endpoints available at http://localhost:${PORT}/api`);
 });
 
-module.exports = app; 
+module.exports = app;
  
  
  

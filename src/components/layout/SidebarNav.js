@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaBookOpen, FaChartBar, FaUser, FaChalkboardTeacher, FaCog, FaUsers } from 'react-icons/fa';
+import { FaBookOpen, FaChartBar, FaUser, FaChalkboardTeacher, FaCog, FaUsers, FaTools } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import './SidebarNav.css';
 
@@ -10,6 +10,10 @@ const SidebarNav = () => {
         <NavLink to="/dashboard" className={({ isActive }) => 'sidebar-item' + (isActive ? ' active' : '')} end>
           <FaBookOpen className="sidebar-icon" />
           <span>My Courses</span>
+        </NavLink>
+        <NavLink to="/ubongo-tools" className={({ isActive }) => 'sidebar-item' + (isActive ? ' active' : '')}>
+          <FaTools className="sidebar-icon" />
+          <span>Ubongo Tools</span>
         </NavLink>
         <NavLink to="/progress" className={({ isActive }) => 'sidebar-item' + (isActive ? ' active' : '')}>
           <FaChartBar className="sidebar-icon" />

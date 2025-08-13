@@ -36,7 +36,6 @@ export default function Signup() {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  // Handle URL parameters to pre-select role
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     const roleParam = searchParams.get('role');
@@ -57,20 +56,10 @@ export default function Signup() {
       const user = await register(form);
       setLoading(false);
       navigate('/login');
-      // login(user.token, user.user); // Uncomment for auto-login
-      // navigate('/dashboard');
     } catch (err) {
       setLoading(false);
       setError(err.message);
     }
-  };
-
-  const handleGoogleSuccess = (user) => {
-    navigate('/');
-  };
-
-  const handleGoogleError = (error) => {
-    console.error('Google signup error:', error);
   };
 
   const renderStepIndicator = () => (
@@ -104,13 +93,13 @@ export default function Signup() {
       <input type="text" className="signup-input" placeholder="Full Name" name="name" value={form.name} onChange={handleChange} disabled={loading} required />
       <input type="email" className="signup-input" placeholder="Email" name="email" value={form.email} onChange={handleChange} disabled={loading} required />
       <input type="password" className="signup-input" placeholder="Password" name="password" value={form.password} onChange={handleChange} disabled={loading} required />
-        <div className="signup-form-row">
+      <div className="signup-form-row">
         <select className="signup-input" name="birthMonth" value={form.birthMonth} onChange={handleChange} disabled={loading}>
-            {months.map(m => <option key={m} value={m}>{m}</option>)}
+          {months.map(m => <option key={m} value={m}>{m}</option>)}
         </select>
         <select className="signup-input" name="birthYear" value={form.birthYear} onChange={handleChange} disabled={loading}>
-            <option value="Year">Year</option>
-            {years.map(y => <option key={y} value={y}>{y}</option>)}
+          <option value="Year">Year</option>
+          {years.map(y => <option key={y} value={y}>{y}</option>)}
         </select>
       </div>
     </div>
@@ -121,11 +110,11 @@ export default function Signup() {
       <h3 className="signup-step-title">Where are you from?</h3>
       <p className="signup-step-subtitle">Select your country and grade</p>
       <select className="signup-input" name="country" value={form.country} onChange={handleChange} disabled={loading}>
-          {countries.map(c => <option key={c} value={c}>{c}</option>)}
-        </select>
+        {countries.map(c => <option key={c} value={c}>{c}</option>)}
+      </select>
       <select className="signup-input" name="grade" value={form.grade} onChange={handleChange} disabled={loading}>
-          {grades.map(g => <option key={g} value={g}>{g}</option>)}
-        </select>
+        {grades.map(g => <option key={g} value={g}>{g}</option>)}
+      </select>
     </div>
   );
 
@@ -144,7 +133,7 @@ export default function Signup() {
   );
 
   const renderCurrentStep = () => {
-    switch (1) { // Assuming currentStep is 1 for now, as the form is now a single step
+    switch (1) {
       case 1:
         return renderStep1();
       case 2:
@@ -172,8 +161,8 @@ export default function Signup() {
             {renderCurrentStep()}
             <div className="signup-step-buttons">
               <button type="submit" className="signup-btn" disabled={loading}>
-                  {loading ? 'Creating account...' : 'Create Account'}
-                </button>
+                {loading ? 'Creating account...' : 'Create Account'}
+              </button>
             </div>
           </form>
           <div className="signup-login-link">Already have an account? <a href="/login">Log in</a></div>
@@ -181,7 +170,7 @@ export default function Signup() {
       </div>
     </div>
   );
-};
+}
  
  
  

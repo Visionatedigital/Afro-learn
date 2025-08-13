@@ -6,21 +6,40 @@ import { useLocation, Outlet } from 'react-router-dom';
 
 const MainLayout = () => {
   const location = useLocation();
-  const hideSidebar = location.pathname === '/' || location.pathname === '/teacher-dashboard' || location.pathname.startsWith('/teacher-dashboard/class/') || location.pathname.startsWith('/parent-dashboard');
+  const hideSidebar =
+    location.pathname === '/' ||
+    location.pathname === '/teacher-dashboard' ||
+    location.pathname.startsWith('/teacher-dashboard/class/') ||
+    location.pathname.startsWith('/parent-dashboard');
+
+  const hideNavbar =
+    location.pathname.startsWith('/dashboard') ||
+    location.pathname.startsWith('/progress') ||
+    location.pathname.startsWith('/profile') ||
+    location.pathname.startsWith('/community') ||
+    location.pathname.startsWith('/teachers') ||
+    location.pathname.startsWith('/settings') ||
+    location.pathname.startsWith('/teacher-dashboard') ||
+    location.pathname.startsWith('/parent-dashboard');
+
   return (
-  <>
-    <Navbar />
-    <div style={{ display: 'flex', minHeight: 'calc(100vh - 120px)' }}>
+    <>
+      {!hideNavbar && <Navbar />}
+      <div style={{ display: 'flex', minHeight: 'calc(100vh - 120px)' }}>
         {!hideSidebar && <SidebarNav />}
-      <main style={{ flex: 1, padding: '2.5rem 3rem', background: '#f7f6f2', minHeight: '100vh', overflowY: 'auto' }}>
+        <main style={{ flex: 1, padding: '2.5rem 3rem', background: '#f7f6f2', minHeight: '100vh', overflowY: 'auto' }}>
           <Outlet />
-      </main>
-    </div>
-    <Footer />
-  </>
-);
+        </main>
+      </div>
+      <Footer />
+    </>
+  );
 };
 
 export default MainLayout; 
+ 
+ 
+ 
+ 
  
  

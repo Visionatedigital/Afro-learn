@@ -267,7 +267,8 @@ button:hover {
   .afl-topbar-mobile {
     display: flex !important;
   }
-  .sidebar, .sidebar-nav, .afl-navbar, .afl-navbar-inner {
+  /* Keep Navbar visible on mobile; only hide sidebars */
+  .sidebar, .sidebar-nav {
     display: none !important;
   }
   .afl-mobile-nav-drawer {

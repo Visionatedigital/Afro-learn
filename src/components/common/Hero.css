@@ -58,26 +58,28 @@
   flex: 1 1 340px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
+  text-align: center;
   min-width: 240px;
 }
 
 .hero-headline {
   font-family: 'Lexend', 'Noto Sans', Arial, sans-serif;
-  font-size: 2.7rem;
+  font-size: clamp(1.6rem, 5vw, 2.7rem);
   font-weight: 900;
   color: #1a1a1a;
   margin-bottom: 1.2rem;
-  line-height: 1.1;
+  line-height: 1.15;
+  word-wrap: break-word;
 }
 
 .hero-subheading {
   font-family: 'Noto Sans', Arial, sans-serif;
-  font-size: 1.25rem;
+  font-size: clamp(0.95rem, 3.8vw, 1.25rem);
   color: #3b3b3b;
   margin-bottom: 2.2rem;
-  max-width: 32rem;
+  max-width: min(32rem, 90vw);
 }
 
 .hero-cta-group {
@@ -89,9 +91,9 @@
 
 .hero-cta {
   font-family: 'Lexend', 'Noto Sans', Arial, sans-serif;
-  font-size: 1.08rem;
+  font-size: clamp(0.95rem, 3.4vw, 1.08rem);
   font-weight: 700;
-  padding: 0.85rem 2.1rem;
+  padding: 0.75rem 1.4rem;
   border-radius: 2rem;
   border: none;
   cursor: pointer;
@@ -143,11 +145,9 @@
     border-radius: 0;
     padding: 0;
   }
-  .hero-headline {
-    font-size: 1.4rem;
-  }
+  .hero-headline { font-size: 1.35rem; }
   .hero-subheading {
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
   .hero-img {
     max-width: 220px;
