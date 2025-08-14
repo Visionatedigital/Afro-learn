@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaCheckCircle, FaRegCircle, FaPlayCircle, FaQuestionCircle } from 'react-icons/fa';
 import LessonContentPage from './LessonContentPage';
+import './UnitLessonView.css';
 
 const masteryIcons = [
   { label: 'Mastered', icon: <FaCheckCircle style={{ color: '#6ecb63' }} /> },
@@ -22,6 +23,15 @@ const UnitLessonView = ({ subject, grade, onBack, initialLessonId, initialLesson
   const [showOverview, setShowOverview] = useState(true);
   const [sidebarMode, setSidebarMode] = useState('units'); // 'units' or 'lessons'
   const [didAutoSelect, setDidAutoSelect] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Track mobile viewport (<=420px)
+  useEffect(() => {
+    const updateIsMobile = () => setIsMobile(window.matchMedia('(max-width: 420px)').matches);
+    updateIsMobile();
+    window.addEventListener('resize', updateIsMobile);
+    return () => window.removeEventListener('resize', updateIsMobile);
+  }, []);
 
   // Fetch units on mount
   useEffect(() => {
@@ -125,7 +135,8 @@ const UnitLessonView = ({ subject, grade, onBack, initialLessonId, initialLesson
   // When a new unit is selected, reset to overview and switch sidebar to lessons
   const handleUnitSelect = (unit) => {
     setSelectedUnit(unit);
-    setShowOverview(true);
+    // On mobile, skip the overview panel (📚 + Start Unit) and go straight to lessons
+    setShowOverview(!isMobile);
     setSelectedLesson(null);
     setSidebarMode('lessons');
   };
@@ -156,9 +167,9 @@ const UnitLessonView = ({ subject, grade, onBack, initialLessonId, initialLesson
   }
 
   return (
-    <div className="unit-lesson-view-main" style={{ display: 'flex', minHeight: 400 }}>
+    <div className={`ulv-container ${sidebarMode === 'lessons' ? 'mode-lessons' : 'mode-units'}`}>
       {/* Sidebar: Units or Lessons */}
-      <aside style={{ width: 220, background: '#f7f7fa', borderRadius: 16, boxShadow: '0 2px 8px #ececec', padding: '1.5rem 0.5rem', marginRight: 32, display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <aside className="ulv-sidebar">
         <div style={{ fontWeight: 600, fontSize: 17, color: '#2d3a2e', marginBottom: 12 }}>{grade.name} {subject.name}</div>
         {sidebarMode === 'units' ? (
           <>
@@ -231,7 +242,16 @@ const UnitLessonView = ({ subject, grade, onBack, initialLessonId, initialLesson
         )}
       </aside>
       {/* Main Content: Unit Overview or Lessons */}
-      <main style={{ flex: 1, background: '#fff', borderRadius: 16, boxShadow: '0 2px 8px #eee', padding: '2rem 2.5rem' }}>
+      <main className="ulv-main">
+        {/* Mobile-only back to Units when in lessons mode */}
+        {sidebarMode === 'lessons' && (
+          <button
+            className="ulv-mobile-only ulv-back-btn"
+            onClick={() => setSidebarMode('units')}
+          >
+            ← Back to Units
+          </button>
+        )}
         {showOverview ? (
           // Unit Overview Panel
           <div>
@@ -275,19 +295,15 @@ const UnitLessonView = ({ subject, grade, onBack, initialLessonId, initialLesson
                 </span>
               ))}
             </div>
-            {/* Lessons List */}
-            <div style={{ marginTop: 18 }}>
+            {/* Lessons List (mobile-only). Hidden on desktop to avoid duplicate lists */}
+            <div className="ulv-lessons-list-main" style={{ marginTop: 18 }}>
               <div style={{ fontWeight: 600, fontSize: 17, color: '#2d3a2e', marginBottom: 10 }}>Lessons</div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {lessons.map(lesson => (
-                  <div key={lesson.id} style={{ display: 'flex', alignItems: 'center', gap: 16, background: '#f7f7fa', borderRadius: 10, padding: '0.8rem 1.2rem', fontSize: 15, color: '#2d3a2e', fontWeight: 500 }}>
+                  <div key={lesson.id} className="ulv-lesson-item">
                     {lesson.videoUrl ? <FaPlayCircle style={{ color: '#b0b3b8', fontSize: 20 }} /> : <FaQuestionCircle style={{ color: '#b0b3b8', fontSize: 20 }} />}
-                    <span>{lesson.name}</span>
-                    <button style={{ background: '#2d3a2e', color: '#fff', border: 'none', borderRadius: 8, padding: '0.3rem 1rem', fontWeight: 500, fontSize: 14, cursor: 'pointer', marginLeft: 'auto' }}
-                      onClick={() => setSelectedLesson(lesson)}
-                    >
-                      Start
-                    </button>
+                    <span className="ulv-lesson-name">{lesson.name}</span>
+                    <button className="ulv-start-btn" onClick={() => setSelectedLesson(lesson)}>Start</button>
                   </div>
                 ))}
               </div>

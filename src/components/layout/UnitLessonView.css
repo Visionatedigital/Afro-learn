@@ -1,0 +1,103 @@
+.ulv-container {
+  display: flex;
+  min-height: 400px;
+  gap: 1rem;
+}
+.ulv-container.mode-lessons {
+  /* default desktop keeps sidebar visible */
+}
+.ulv-sidebar {
+  width: 220px;
+  background: #f7f7fa;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px #ececec;
+  padding: 1.5rem 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ulv-main {
+  flex: 1;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 8px #eee;
+  padding: 2rem 2.5rem;
+  min-width: 0; /* allow flex child to shrink without causing overflow */
+}
+.ulv-lesson-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f7f7fa;
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  font-size: 15px;
+  color: #2d3a2e;
+  font-weight: 500;
+}
+.ulv-lesson-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.ulv-start-btn {
+  background: #2d3a2e;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.35rem 0.9rem;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+/* Mobile adjustments for <= 420px */
+@media (max-width: 420px) {
+  .ulv-container {
+    flex-direction: column;
+  }
+  /* Hide overview panel entirely on mobile when lessons mode is active */
+  .ulv-container.mode-lessons .ulv-main > div:first-child {
+    display: none;
+  }
+  /* Hide sidebar when in lessons mode on mobile */
+  .ulv-container.mode-lessons .ulv-sidebar {
+    display: none;
+  }
+  .ulv-container.mode-units .ulv-main {
+    display: none;
+  }
+  .ulv-sidebar {
+    width: 100%;
+    border-radius: 12px;
+    padding: 1rem 0.5rem;
+  }
+  .ulv-main {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+  /* tighter lesson row spacing on small screens */
+  .ulv-lesson-item { gap: 8px; padding: 0.6rem 0.8rem; }
+  .ulv-lesson-name { font-size: 14px; }
+  .ulv-start-btn { padding: 0.3rem 0.7rem; font-size: 13px; }
+  .ulv-mobile-only { display: inline-flex; }
+  .ulv-lessons-list-main { display: block; }
+}
+
+/* hidden by default except where enabled */
+.ulv-mobile-only { display: none; }
+.ulv-lessons-list-main { display: none; }
+.ulv-back-btn {
+  background: none;
+  border: 1px solid #2d3a2e;
+  color: #2d3a2e;
+  border-radius: 8px;
+  padding: 0.4rem 0.8rem;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 0.6rem;
+}
+ 
+
