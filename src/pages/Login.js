@@ -4,10 +4,15 @@ import { login as loginApi } from '../services/authService';
 import { useAuth } from '../context/AuthContext';
 import GoogleSignIn from '../components/GoogleSignIn';
 import './Login.css';
-import loginIllustration from '../assets/images/child_looking_up.png';
+import fallbackIllustration from '../assets/images/child_looking_up.png';
+import img1 from '../assets/images/IMG_4416.PNG';
+import img2 from '../assets/images/IMG_4417.PNG';
+import img3 from '../assets/images/IMG_4418.PNG';
 
 const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' });
+  const heroImages = [img1, img2, img3, fallbackIllustration];
+  const [heroIndex, setHeroIndex] = useState(Math.floor(Math.random() * heroImages.length));
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
@@ -16,6 +21,13 @@ const Login = () => {
   const handleChange = e => {
     setForm(f => ({ ...f, [e.target.name]: e.target.value }));
   };
+
+  React.useEffect(() => {
+    const id = setInterval(() => {
+      setHeroIndex((i) => (i + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(id);
+  }, []);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -43,7 +55,7 @@ const Login = () => {
   return (
     <div className="login-root">
       <div className="login-illustration">
-        <img src={loginIllustration} alt="AfroLearn login illustration" />
+        <img src={heroImages[heroIndex]} alt="AfroLearn login" />
       </div>
       <div className="login-form-container">
         <div className="login-form-inner">

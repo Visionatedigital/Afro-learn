@@ -5,6 +5,9 @@ import { useAuth } from '../context/AuthContext';
 import GoogleSignIn from '../components/GoogleSignIn';
 import './Signup.css';
 import signupIllustration from '../assets/images/signup-illustration.png';
+import img1 from '../assets/images/IMG_4416.PNG';
+import img2 from '../assets/images/IMG_4417.PNG';
+import img3 from '../assets/images/IMG_4418.PNG';
 
 const roles = ['Learner', 'Teacher', 'Parent'];
 const months = [
@@ -34,6 +37,8 @@ export default function Signup() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
+  const heroImages = [img1, img2, img3, signupIllustration];
+  const [heroIndex, setHeroIndex] = useState(Math.floor(Math.random() * heroImages.length));
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -43,6 +48,13 @@ export default function Signup() {
       setForm(prev => ({ ...prev, role: roleParam.toLowerCase() }));
     }
   }, [location.search]);
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setHeroIndex((i) => (i + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(id);
+  }, []);
 
   const handleChange = e => {
     setForm(f => ({ ...f, [e.target.name]: e.target.value }));
@@ -93,11 +105,12 @@ export default function Signup() {
       <input type="text" className="signup-input" placeholder="Full Name" name="name" value={form.name} onChange={handleChange} disabled={loading} required />
       <input type="email" className="signup-input" placeholder="Email" name="email" value={form.email} onChange={handleChange} disabled={loading} required />
       <input type="password" className="signup-input" placeholder="Password" name="password" value={form.password} onChange={handleChange} disabled={loading} required />
-      <div className="signup-form-row">
-        <select className="signup-input" name="birthMonth" value={form.birthMonth} onChange={handleChange} disabled={loading}>
+      <div className="signup-dob-label">Date of Birth</div>
+      <div className="signup-form-row" aria-label="Date of Birth">
+        <select className="signup-input" name="birthMonth" value={form.birthMonth} onChange={handleChange} disabled={loading} aria-label="Birth month">
           {months.map(m => <option key={m} value={m}>{m}</option>)}
         </select>
-        <select className="signup-input" name="birthYear" value={form.birthYear} onChange={handleChange} disabled={loading}>
+        <select className="signup-input" name="birthYear" value={form.birthYear} onChange={handleChange} disabled={loading} aria-label="Birth year">
           <option value="Year">Year</option>
           {years.map(y => <option key={y} value={y}>{y}</option>)}
         </select>
@@ -148,7 +161,7 @@ export default function Signup() {
   return (
     <div className="signup-root">
       <div className="signup-illustration">
-        <img src={signupIllustration} alt="AfroLearn sign up illustration" />
+        <img src={heroImages[heroIndex]} alt="AfroLearn sign up" />
       </div>
       <div className="signup-form-container">
         <div className="signup-form-inner">

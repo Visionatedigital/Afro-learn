@@ -227,6 +227,12 @@
   width: 100%;
   align-items: center;
 }
+.signup-dob-label {
+  width: 100%;
+  color: #6c7f6c;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
 .signup-form-row {
   display: flex;
   gap: 0.6rem;
@@ -245,7 +251,8 @@
   min-width: 0;
 }
 .signup-input:focus {
-  border-color: #a5d8a5;
+  border-color: #2bb6bb;
+  box-shadow: 0 0 0 3px rgba(43, 182, 187, 0.12);
 }
 .signup-input:disabled {
   background: #f5f5f5;
@@ -254,8 +261,8 @@
 }
 .signup-btn {
   width: 100%;
-  background: #a5d8a5;
-  color: #131613;
+  background: #2bb6bb;
+  color: #fff;
   font-weight: 700;
   font-size: 1rem;
   border: none;
@@ -263,19 +270,14 @@
   padding: 0.7rem 0;
   cursor: pointer;
   margin-top: 0.2rem;
-  transition: background 0.15s;
+  transition: background 0.15s, transform 0.05s ease-in-out;
 }
-.signup-btn:hover:not(:disabled) {
-  background: #8fcf8f;
-}
+.signup-btn:hover:not(:disabled) { background: #25a3a8; }
 .signup-btn:disabled {
-  background: #ccc;
+  background: #9bdcdf;
   cursor: not-allowed;
 }
-.signup-btn.loading {
-  background: #8fcf8f;
-  cursor: wait;
-}
+.signup-btn.loading { background: #25a3a8; cursor: wait; }
 .signup-login-link {
   text-align: center;
   color: #6c7f6c;
