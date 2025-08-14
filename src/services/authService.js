@@ -1,10 +1,9 @@
 import axios from 'axios';
 
-// Use env-provided API base in prod; support both names, fallback to CRA proxy '/api' in dev
-const API_BASE_URL =
-  process.env.REACT_APP_API_BASE_URL ||
-  process.env.REACT_APP_API_URL ||
-  '/api';
+// Resolve API base. Accept either full base with or without trailing /api
+const rawApiBase = process.env.REACT_APP_API_BASE_URL || process.env.REACT_APP_API_URL || '/api';
+const hasApiSuffix = /\/api\/?$/i.test(rawApiBase);
+const API_BASE_URL = rawApiBase === '/api' ? '/api' : (hasApiSuffix ? rawApiBase.replace(/\/?$/, '') : `${rawApiBase.replace(/\/?$/, '')}/api`);
 
 export async function register({ email, password, name, role, ...rest }) {
   const res = await fetch(`${API_BASE_URL}/register`, {
