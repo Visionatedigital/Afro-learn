@@ -227,6 +227,59 @@
   animation: slideIn 0.3s;
 }
 
+/* Mobile menu header */
+.afl-mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  padding: 0.25rem 0.25rem 0.75rem 0.25rem;
+  background: #ffffffcc;
+  backdrop-filter: blur(4px);
+  border-bottom: 1px solid #eee;
+  z-index: 1001;
+}
+.afl-mobile-menu-header .afl-logo-text {
+  font-size: 1.25rem;
+  font-weight: 800;
+}
+
+/* Vertical sections */
+.afl-mobile-menu-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+.afl-mobile-nav-section {
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 0.5rem;
+}
+.afl-mobile-nav-section-title {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.5rem 0.35rem 0.5rem;
+}
+.afl-mobile-nav-section a,
+.afl-mobile-nav-section button {
+  display: block;
+  width: 100%;
+  padding: 0.9rem 0.9rem;
+  border-radius: 10px;
+}
+.afl-mobile-nav-section a + a,
+.afl-mobile-nav-section button + a,
+.afl-mobile-nav-section a + button,
+.afl-mobile-nav-section button + button {
+  margin-top: 0.25rem;
+}
+
 .afl-mobile-close {
   position: absolute;
   top: 18px;
