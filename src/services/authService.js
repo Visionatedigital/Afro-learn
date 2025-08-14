@@ -1,7 +1,10 @@
 import axios from 'axios';
 
-// Use an environment-provided API base in production; fallback to CRA proxy '/api' in dev
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '/api';
+// Use env-provided API base in prod; support both names, fallback to CRA proxy '/api' in dev
+const API_BASE_URL =
+  process.env.REACT_APP_API_BASE_URL ||
+  process.env.REACT_APP_API_URL ||
+  '/api';
 
 export async function register({ email, password, name, role, ...rest }) {
   const res = await fetch(`${API_BASE_URL}/register`, {
