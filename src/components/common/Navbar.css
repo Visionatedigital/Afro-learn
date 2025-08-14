@@ -302,12 +302,20 @@
     gap: 1rem;
   }
 }
-@media (max-width: 700px) {
+@media (max-width: 768px) {
   .afl-navbar-inner {
     flex-direction: row;
     padding: 0.5rem 0.5rem;
   }
-  .afl-navbar-left, .afl-navbar-right {
+  .afl-navbar-left {
+    display: none;
+  }
+  .afl-navbar-right {
+    display: flex;
+    gap: 0.5rem;
+  }
+  .afl-navbar-right .afl-login,
+  .afl-navbar-right .afl-signup {
     display: none;
   }
   .afl-navbar-center {

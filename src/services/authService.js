@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_BASE_URL = '/api';
+// Use an environment-provided API base in production; fallback to CRA proxy '/api' in dev
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '/api';
 
 export async function register({ email, password, name, role, ...rest }) {
   const res = await fetch(`${API_BASE_URL}/register`, {
