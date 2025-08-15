@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Navbar() {
   const [mobileMenu, setMobileMenu] = useState(false);
   const [exploreOpen, setExploreOpen] = useState(false);
-  const [userMenuOpen, setUserMenuOpen] = useState(false);
+  // const [userMenuOpen, setUserMenuOpen] = useState(false);
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -28,10 +28,6 @@ export default function Navbar() {
     }
     return () => { document.body.style.overflow = ''; };
   }, [mobileMenu]);
-
-  
-
-  
 
   // Debounced search
   const handleSearchChange = (e) => {
@@ -105,8 +101,6 @@ export default function Navbar() {
     setMobileMenu(false);
     navigate('/');
   };
-
-  
 
   return (
     <header className="afl-navbar">

@@ -1,7 +1,10 @@
 import axios from 'axios';
 
-// Resolve API base. Accept either full base with or without trailing /api
-const rawApiBase = process.env.REACT_APP_API_BASE_URL || process.env.REACT_APP_API_URL || '/api';
+// Resolve API base. In production (deployed frontend), prefer relative '/api' so rewrites handle proxying
+const preferRelativeInProd = typeof window !== 'undefined' && window.location && /vercel\.app$/i.test(window.location.host);
+const rawApiBase = preferRelativeInProd
+  ? '/api'
+  : (process.env.REACT_APP_API_BASE_URL || process.env.REACT_APP_API_URL || '/api');
 const hasApiSuffix = /\/api\/?$/i.test(rawApiBase);
 const API_BASE_URL = rawApiBase === '/api' ? '/api' : (hasApiSuffix ? rawApiBase.replace(/\/?$/, '') : `${rawApiBase.replace(/\/?$/, '')}/api`);
 
