@@ -6,7 +6,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://strong-numbers-sink.loca.lt/api/$1"
+      "destination": "https://fraction-numerous-hampton-continuity.trycloudflare.com/api/$1"
     }
   ]
 }
