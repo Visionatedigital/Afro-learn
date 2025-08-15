@@ -6,7 +6,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://fraction-numerous-hampton-continuity.trycloudflare.com/api/$1"
+      "destination": "https://polo-speeds-accomplish-mens.trycloudflare.com/api/$1"
     }
   ]
 }
