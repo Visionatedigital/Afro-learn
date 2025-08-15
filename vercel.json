@@ -6,7 +6,7 @@
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "https://readings-bobby-marshall-friends.trycloudflare.com/api/$1"
+      "destination": "https://strong-numbers-sink.loca.lt/api/$1"
     }
   ]
 }
