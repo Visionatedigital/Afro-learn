@@ -1,16 +1,7 @@
 import React, { useState } from 'react';
 import ToolHeader from '../../components/tools/ToolHeader';
 
-function makeMnemonics(topic) {
-  const t = topic.trim();
-  if (!t) return [];
-  const simple = t.split(/\s+/).slice(0, 3).join(' ');
-  return [
-    `Story: Imagine a character dealing with ${simple} in a funny way so you never forget.`,
-    `Acronym: Take the first letters of key words about ${simple} and make a catchy word.`,
-    `Chunking: Break ${simple} into 3 small parts and practice each part quickly.`
-  ];
-}
+// removed unused makeMnemonics helper
 
 export default function MemoryHooksPage({ userProfile = { age: 10, level: 'Intermediate' } }) {
   const [topic, setTopic] = useState('');

@@ -11,7 +11,7 @@ export default function Settings() {
   const [avatar, setAvatar] = useState('');
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   const [notifications, setNotifications] = useState(localStorage.getItem('notifications') !== 'off');
-  const [showTooltip, setShowTooltip] = useState(null);
+  // const [showTooltip, setShowTooltip] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);

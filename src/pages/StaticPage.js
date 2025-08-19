@@ -33,3 +33,6 @@ export default function StaticPage({ title, subtitle, children }) {
 
 
 
+
+
+

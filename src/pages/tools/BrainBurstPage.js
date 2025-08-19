@@ -7,23 +7,13 @@ function getAgeBand(age) {
   return '11-12';
 }
 
-function explain(topic, band) {
-  const t = topic.trim();
-  if (!t) return '';
-  if (band === '6-8') {
-    return `Let's learn about ${t}. This means something simple you can see or do. Think about it like a fun game with easy rules.`;
-  }
-  if (band === '9-10') {
-    return `${t} can be understood by breaking it into small parts. First, what it is. Then, how it works. Finally, why it matters.`;
-  }
-  return `${t}: A clear idea explained in steps — definition, key points, and a short example. This helps you understand and remember it fast.`;
-}
+// removed unused explain helper
 
 export default function BrainBurstPage({ userProfile = { age: 10 } }) {
   const [topic, setTopic] = useState('');
   const [output, setOutput] = useState('');
   const [loading, setLoading] = useState(false);
-  const band = useMemo(() => getAgeBand(Number(userProfile?.age ?? 10)), [userProfile?.age]);
+  // const band = useMemo(() => getAgeBand(Number(userProfile?.age ?? 10)), [userProfile?.age]);
 
   const run = async () => {
     if (!topic.trim()) return;

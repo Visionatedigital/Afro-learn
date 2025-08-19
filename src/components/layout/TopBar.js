@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FaBell, FaBars, FaTimes, FaBookOpen, FaChartBar, FaUser, FaChalkboardTeacher, FaCog, FaUsers, FaChevronDown, FaChevronUp } from 'react-icons/fa';
+import { FaBell, FaBars, FaTimes, FaBookOpen, FaChartBar, FaUser, FaChalkboardTeacher, FaCog, FaUsers } from 'react-icons/fa';
 import { useAuth } from '../../context/AuthContext';
 import { NavLink, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/Afrolearn Logo_edited_edited.png';
@@ -210,3 +210,4 @@ const TopBar = () => {
 };
 
 export default TopBar; 
+

@@ -175,9 +175,7 @@ function CombinedFriends() {
   function getToken() {
     return localStorage.getItem('token');
   }
-  function getUser() {
-    return JSON.parse(localStorage.getItem('user') || '{}');
-  }
+  // getUser not used in this component; removed to satisfy lint
 
   // Fetch friends and pending requests
   useEffect(() => {
@@ -323,7 +321,7 @@ function CombinedFriends() {
                     <img src={req.picture || FALLBACK_AVATAR} alt={req.name} style={{ width: 54, height: 54, borderRadius: '50%', border: '2px solid #eee', marginBottom: 8 }} />
                     <div style={{ fontWeight: 600, fontSize: 16, color: '#2d3a2e', marginBottom: 2 }}>{req.name}</div>
                     <div style={{ fontSize: 13, color: '#888', marginBottom: 4 }}>{req.email}</div>
-                    <button onClick={() => handleAcceptRequest(req.friendshipId)} style={{ background: '#a5d8a5', color: '#2d3a2e', border: 'none', borderRadius: 8, padding: '0.3rem 1rem', fontWeight: 600, fontSize: 14, cursor: 'pointer', marginTop: 4 }}>Accept</button>
+                    <button onClick={() => handleAcceptRequest(req.friendshipId)} disabled={accepting} style={{ background: '#a5d8a5', color: '#2d3a2e', border: 'none', borderRadius: 8, padding: '0.3rem 1rem', fontWeight: 600, fontSize: 14, cursor: accepting ? 'not-allowed' : 'pointer', opacity: accepting ? 0.7 : 1, marginTop: 4 }}>Accept</button>
                   </div>
                 ))}
               </div>
@@ -371,7 +369,7 @@ function GroupDashboard({ group, onClose }) {
   const [inviteError, setInviteError] = useState(null);
   const [inviteSuccess, setInviteSuccess] = useState(null);
   const [encouragements, setEncouragements] = useState([]);
-  const [encouragementError, setEncouragementError] = useState(null);
+  const [, setEncouragementError] = useState(null);
 
   // Helper to get JWT token from localStorage
   function getToken() {
@@ -465,7 +463,7 @@ function GroupDashboard({ group, onClose }) {
   const groupMembers = Array.isArray(group.members)
     ? allUsers.filter(u => group.members.includes(u.id))
     : [];
-  const currentUser = allUsers.find(u => u.isCurrentUser);
+  // removed unused currentUser
 
   const handleSendEncouragement = async (toUserId) => {
     if (selectedEncouragement) {
@@ -1015,10 +1013,10 @@ function Groups({ onGroupSelect }) {
     console.log('[DEBUG] Current user:', user);
   }, [groups]);
 
-  const categories = [
-    'Mathematics', 'Science', 'History', 'Language Arts', 
-    'Geography', 'Computer Science', 'Art & Music', 'Physical Education'
-  ];
+  // const categories = [
+  //   'Mathematics', 'Science', 'History', 'Language Arts', 
+  //   'Geography', 'Computer Science', 'Art & Music', 'Physical Education'
+  // ];
 
   const handleInputChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
@@ -1063,19 +1061,19 @@ function Groups({ onGroupSelect }) {
     }
   };
 
-  const toggleFriendSelection = (friendId) => {
-    setFormData(prev => ({
-      ...prev,
-      selectedFriends: prev.selectedFriends.includes(friendId)
-        ? prev.selectedFriends.filter(id => id !== friendId)
-        : [...prev.selectedFriends, friendId]
-    }));
-  };
+  // const toggleFriendSelection = (friendId) => {
+  //   setFormData(prev => ({
+  //     ...prev,
+  //     selectedFriends: prev.selectedFriends.includes(friendId)
+  //       ? prev.selectedFriends.filter(id => id !== friendId)
+  //       : [...prev.selectedFriends, friendId]
+  //   }));
+  // };
 
   // Get current user's friends for invitation
-  const currentUserFriends = allUsers.filter(u => 
-    [1, 2].includes(u.id) && !u.isCurrentUser // Assuming user has friends with IDs 1, 2
-  );
+  // const currentUserFriends = allUsers.filter(u => 
+  //   [1, 2].includes(u.id) && !u.isCurrentUser
+  // );
 
   if (loading) {
     return <div style={{ padding: '2rem', textAlign: 'center' }}>Loading groups...</div>;

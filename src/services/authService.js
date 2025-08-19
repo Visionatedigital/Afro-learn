@@ -1,4 +1,4 @@
-import axios from 'axios';
+ 
 
 // Resolve API base. In production (deployed frontend), prefer relative '/api' so rewrites handle proxying
 const preferRelativeInProd = typeof window !== 'undefined' && window.location && /vercel\.app$/i.test(window.location.host);
@@ -36,7 +36,8 @@ export async function getMe(token) {
   return await res.json();
 }
 
-export default { register, login, getMe }; 
+const authService = { register, login, getMe };
+export default authService; 
  
  
  

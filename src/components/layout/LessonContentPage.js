@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
-const videoLessonTitle = 'Adding within 20 using place value blocks';
-const videoSrc = require('../../assets/images/Adding with place value blocks.mp4');
+// Unused mock values removed to satisfy lint rules
 
 const mockExplanation = 'In this lesson, you will learn how to add numbers within 20 using place value blocks. Place value blocks help you visualize numbers and make addition easier!';
 const mockQuestions = [

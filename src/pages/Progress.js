@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaCalculator, FaBook, FaFlask, FaMedal, FaChevronDown, FaChevronUp, FaPlayCircle, FaQuestionCircle, FaCheckCircle, FaRegCircle, FaClipboardList, FaGlobeAfrica, FaUsers, FaMoneyBillWave, FaCode } from 'react-icons/fa';
+import { FaCalculator, FaBook, FaFlask, FaMedal, FaChevronDown, FaChevronUp, FaPlayCircle, FaQuestionCircle, FaCheckCircle, FaRegCircle, FaClipboardList, FaGlobeAfrica, FaMoneyBillWave, FaCode } from 'react-icons/fa';
 import TopBar from '../components/layout/TopBar';
 
 const iconMap = {

@@ -1,13 +1,7 @@
 import React, { useState } from 'react';
 import ToolHeader from '../../components/tools/ToolHeader';
 
-function summarize(text) {
-  if (!text.trim()) return '';
-  const sentences = text.replace(/\s+/g, ' ').split(/(?<=[.!?])\s+/).filter(Boolean);
-  const head = sentences[0] || '';
-  const bullets = sentences.slice(1, 3).map((s) => `• ${s.replace(/[.!?]$/, '')}`);
-  return `${head}\n${bullets.join('\n')}`.trim();
-}
+// removed unused summarize helper
 
 export default function LightningSummaryPage({ userProfile = { age: 10, level: 'Intermediate' } }) {
   const [text, setText] = useState('');

@@ -35,6 +35,10 @@ app.use('/avatars', express.static(require('path').join(__dirname, '../../avatar
 const aiRoutes = require('./routes/aiRoutes');
 app.use('/api/ai', aiRoutes);
 
+// Video routes
+const videoRoutes = require('./routes/videoRoutes');
+app.use('/api/video', videoRoutes);
+
 // JWT auth middleware
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
@@ -1570,9 +1574,11 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 AfroLearn API Server running on port ${PORT}`);
   console.log(`📡 API endpoints available at http://localhost:${PORT}/api`);
+  console.log(`🌐 Network accessible at http://0.0.0.0:${PORT}/api`);
+  console.log(`📱 Mobile devices can connect using your computer's IP address`);
 });
 
 module.exports = app;

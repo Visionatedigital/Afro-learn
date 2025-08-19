@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { FaChalkboardTeacher, FaUsers, FaBook, FaRegLightbulb, FaHome, FaChevronRight, FaTasks, FaTrophy, FaUserCheck, FaPlus, FaEdit, FaArchive, FaEye, FaExclamationTriangle } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
+import { FaChalkboardTeacher, FaUsers, FaBook, FaRegLightbulb, FaHome, FaChevronRight, FaTasks, FaTrophy, FaUserCheck, FaPlus, FaArchive, FaEye, FaExclamationTriangle } from 'react-icons/fa';
+// import { useNavigate } from 'react-router-dom';
 
 const tabs = [
   { key: 'overview', label: 'Overview', icon: <FaHome /> },
@@ -40,8 +40,7 @@ const mockResources = [
 
 export default function TeacherDashboard() {
   const [activeTab, setActiveTab] = useState('overview');
-  const [showClassModal, setShowClassModal] = useState(false);
-  const [selectedClass, setSelectedClass] = useState(null);
+  // removed unused showClassModal/selectedClass
   const [showAddClassModal, setShowAddClassModal] = useState(false);
   const [classes, setClasses] = useState([]);
   const [classesLoading, setClassesLoading] = useState(true);
@@ -113,7 +112,7 @@ export default function TeacherDashboard() {
     { key: 'learn', label: 'Learn' },
   ];
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate(); // not used
 
   // Mock students for class details
   const mockStudents = [
@@ -125,8 +124,8 @@ export default function TeacherDashboard() {
 
   // Compute summary stats
   const totalStudents = mockStudents.length;
-  const avgProgress = Math.round(mockStudents.reduce((sum, s) => sum + s.progress, 0) / totalStudents);
-  const topPerformer = mockStudents.reduce((top, s) => (s.progress > top.progress ? s : top), mockStudents[0]);
+  // const avgProgress = Math.round(mockStudents.reduce((sum, s) => sum + s.progress, 0) / totalStudents);
+  // const topPerformer = mockStudents.reduce((top, s) => (s.progress > top.progress ? s : top), mockStudents[0]);
 
   const handleViewClass = (cls) => {
     setShowClassSummaryModal(true);
@@ -151,9 +150,9 @@ export default function TeacherDashboard() {
       });
   };
 
-  const handleEditClass = (cls) => {
-    alert(`Edit functionality coming soon for ${cls.name}`);
-  };
+  // const handleEditClass = (cls) => {
+  //   alert(`Edit functionality coming soon for ${cls.name}`);
+  // };
 
   const handleArchiveClass = (cls) => {
     if (window.confirm(`Are you sure you want to archive ${cls.name}?`)) {
@@ -360,9 +359,9 @@ export default function TeacherDashboard() {
                   <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
                     {classes.map(cls => (
                       <li key={cls.id} style={{ marginBottom: 6 }}>
-                        <a href="#" style={{ color: '#c2185b', fontWeight: 600, textDecoration: 'none', fontSize: 16, display: 'flex', alignItems: 'center', gap: 6 }} onClick={e => { e.preventDefault(); handleViewClass(cls); }}>
+                        <button type="button" style={{ background: 'none', border: 'none', color: '#c2185b', fontWeight: 600, textDecoration: 'none', fontSize: 16, display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer', padding: 0 }} onClick={() => handleViewClass(cls)}>
                           {cls.name} <FaChevronRight style={{ fontSize: 13 }} />
-                        </a>
+                        </button>
                       </li>
                     ))}
                   </ul>

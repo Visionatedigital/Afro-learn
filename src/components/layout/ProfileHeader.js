@@ -1,29 +1,9 @@
 import React from 'react';
-import { FaStar, FaBookOpen, FaFlask, FaFire, FaTrophy, FaLock, FaCalendarCheck, FaMedal, FaArrowRight } from 'react-icons/fa';
 import { useAuth } from '../../context/AuthContext';
 
-// StreakWidget component
-const StreakWidget = ({ streak, milestones }) => (
-  <div style={{ display: 'flex', alignItems: 'center', gap: 16, background: '#fff9ec', borderRadius: 12, padding: '0.7rem 1.2rem', boxShadow: '0 1px 4px #ffe082', minWidth: 180 }} title="Complete a new skill each week (Mon–Sun) to keep your streak!">
-    <FaFire style={{ color: '#ff9800', fontSize: 24 }} />
-    <span style={{ fontWeight: 600, fontSize: 17, color: '#ff9800' }}>{streak}-week streak</span>
-    <div style={{ display: 'flex', gap: 6, marginLeft: 10 }}>
-      {milestones.map(m => (
-        <span key={m.weeks} title={m.label} style={{ opacity: streak >= m.weeks ? 1 : 0.3 }}>
-          {m.icon}
-        </span>
-      ))}
-    </div>
-  </div>
-);
+// StreakWidget removed (unused)
 
-// OverallLevelBadge component
-const OverallLevelBadge = ({ level }) => (
-  <div style={{ display: 'flex', alignItems: 'center', gap: 8, background: '#e0f7fa', borderRadius: 12, padding: '0.7rem 1.2rem', fontWeight: 600, fontSize: 17, color: '#00796b', minWidth: 120 }} title="Your overall learning level">
-    <FaMedal style={{ color: '#00796b', fontSize: 22 }} />
-    Level {level} Scholar
-  </div>
-);
+// OverallLevelBadge removed (unused)
 
 const ProfileHeader = () => {
   const { user } = useAuth();

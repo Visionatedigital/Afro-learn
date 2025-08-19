@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import ToolHeader from '../../components/tools/ToolHeader';
 
 function speak(text) {

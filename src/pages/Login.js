@@ -27,7 +27,7 @@ const Login = () => {
       setHeroIndex((i) => (i + 1) % heroImages.length);
     }, 5000);
     return () => clearInterval(id);
-  }, []);
+  }, [heroImages.length]);
 
   const handleSubmit = async e => {
     e.preventDefault();

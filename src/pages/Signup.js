@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { register } from '../services/authService';
-import { useAuth } from '../context/AuthContext';
-import GoogleSignIn from '../components/GoogleSignIn';
 import './Signup.css';
 import signupIllustration from '../assets/images/signup-illustration.png';
 import img1 from '../assets/images/IMG_4416.PNG';
@@ -36,7 +34,6 @@ export default function Signup() {
   const [form, setForm] = useState({ email: '', password: '', name: '', role: 'learner' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
   const heroImages = [img1, img2, img3, signupIllustration];
   const [heroIndex, setHeroIndex] = useState(Math.floor(Math.random() * heroImages.length));
   const navigate = useNavigate();
@@ -54,7 +51,7 @@ export default function Signup() {
       setHeroIndex((i) => (i + 1) % heroImages.length);
     }, 5000);
     return () => clearInterval(id);
-  }, []);
+  }, [heroImages.length]);
 
   const handleChange = e => {
     setForm(f => ({ ...f, [e.target.name]: e.target.value }));
