@@ -42,6 +42,9 @@ app.use(cors({
 }));
 app.options('*', cors());
 app.use(express.json());
+
+// Simple healthcheck (register before static catch-all)
+app.get('/health', (req, res) => res.send('ok'));
 app.use('/avatars', express.static(require('path').join(__dirname, '../../avatars')));
 
 // AI routes
@@ -1586,9 +1589,6 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, '../../build', 'index.html'));
   });
 }
-
-// Simple healthcheck
-app.get('/health', (req, res) => res.send('ok'));
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 AfroLearn API Server running on port ${PORT}`);
