@@ -24,10 +24,23 @@ const avatarStorage = multer.diskStorage({
 const uploadAvatar = multer({ storage: avatarStorage });
 
 const app = express();
-const PORT = process.env.REACT_APP_API_PORT || 3001;
+const PORT = process.env.PORT || process.env.REACT_APP_API_PORT || 3001;
 
 // Middleware
-app.use(cors());
+const allowedOrigins = (process.env.CORS_ORIGIN || '').split(',').map(s => s.trim()).filter(Boolean);
+app.use(cors({
+  origin: function(origin, callback) {
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.length === 0) return callback(null, true);
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    if (/\.vercel\.app$/i.test(origin)) return callback(null, true);
+    return callback(null, false);
+  },
+  methods: ['GET','POST','PUT','PATCH','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type','Authorization'],
+  credentials: true,
+}));
+app.options('*', cors());
 app.use(express.json());
 app.use('/avatars', express.static(require('path').join(__dirname, '../../avatars')));
 
@@ -397,7 +410,7 @@ app.get('/api/community/groups', authenticateToken, async (req, res) => {
 // --- Community: Create a new group ---
 app.post('/api/community/groups', authenticateToken, async (req, res) => {
   try {
-    const { name, description, category, maxMembers } = req.body;
+    const { name, description } = req.body;
     if (!name) {
       return res.status(400).json({ error: 'Group name is required' });
     }
@@ -1573,6 +1586,9 @@ if (process.env.NODE_ENV === 'production') {
     res.sendFile(path.join(__dirname, '../../build', 'index.html'));
   });
 }
+
+// Simple healthcheck
+app.get('/health', (req, res) => res.send('ok'));
 
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`🚀 AfroLearn API Server running on port ${PORT}`);

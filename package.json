@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@prisma/client": "^6.12.0",
     "@react-oauth/google": "^0.12.2",
     "@react-three/drei": "^10.6.1",
     "@react-three/fiber": "^9.2.0",
@@ -72,7 +73,6 @@
   },
   "proxy": "http://localhost:3001",
   "devDependencies": {
-    "@prisma/client": "^6.12.0",
     "prisma": "^6.12.0"
   }
 }
