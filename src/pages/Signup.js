@@ -62,7 +62,7 @@ export default function Signup() {
     setError('');
     setLoading(true);
     try {
-      const user = await register(form);
+      await register(form);
       setLoading(false);
       navigate('/login');
     } catch (err) {

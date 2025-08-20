@@ -78,13 +78,13 @@ const TopBar = () => {
         minHeight: 56,
       }}>
         {/* Logo (center) */}
-        <div style={{ flex: 1, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <img src={logo} alt="AfroLearn logo" style={{ height: 32, width: 'auto', marginRight: 8 }} />
           <span style={{ fontWeight: 700, fontSize: 20, color: '#2bb6bb', letterSpacing: 1 }}>AfroLearn</span>
         </div>
         {/* Bell icon (notifications) */}
         {user && (
-          <div style={{ position: 'relative', marginRight: 8, display: 'inline-block' }}>
+          <div style={{ position: 'relative', marginRight: 8, display: 'inline-flex', alignItems: 'center', gap: 8 }}>
             <button
               className="afl-bell"
               style={{ background: 'none', border: 'none', color: '#ff9800', fontSize: 20, cursor: 'pointer', position: 'relative' }}
@@ -120,6 +120,14 @@ const TopBar = () => {
                 )}
               </div>
             )}
+            {/* Quick logout button (visible) */}
+            <button
+              onClick={handleLogout}
+              aria-label="Log out"
+              style={{ background: 'none', border: '1px solid #e82630', color: '#e82630', fontWeight: 700, cursor: 'pointer', fontSize: 13, borderRadius: 8, padding: '4px 8px' }}
+            >
+              Log out
+            </button>
           </div>
         )}
         {/* Hamburger menu (right) */}

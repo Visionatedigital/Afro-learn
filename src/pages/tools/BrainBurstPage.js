@@ -1,11 +1,11 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import ToolHeader from '../../components/tools/ToolHeader';
 
-function getAgeBand(age) {
-  if (age <= 8) return '6-8';
-  if (age <= 10) return '9-10';
-  return '11-12';
-}
+// const getAgeBand = (age) => {
+//   if (age <= 8) return '6-8';
+//   if (age <= 10) return '9-10';
+//   return '11-12';
+// };
 
 // removed unused explain helper
 

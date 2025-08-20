@@ -5,7 +5,6 @@ import TopBar from '../components/layout/TopBar';
 const FALLBACK_AVATAR = 'https://ui-avatars.com/api/?name=User&background=eee&color=888&size=128';
 
 export default function Settings() {
-  const [user, setUser] = useState(null);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [avatar, setAvatar] = useState('');
@@ -23,13 +22,10 @@ export default function Settings() {
 
   useEffect(() => {
     const u = JSON.parse(localStorage.getItem('user') || '{}');
-    setUser(u);
     setName(u.name || '');
     setEmail(u.email || '');
     setAvatar(u.picture || '');
     setLoading(false);
-    // Apply theme on mount
-    document.body.classList.toggle('dark-theme', theme === 'dark');
   }, []);
 
   useEffect(() => {
@@ -54,7 +50,6 @@ export default function Settings() {
       }
       const data = await res.json();
       setSuccess('Profile updated!');
-      setUser(data.user);
       localStorage.setItem('user', JSON.stringify(data.user));
     } catch (err) {
       setError('Failed to update profile');
@@ -91,7 +86,6 @@ export default function Settings() {
       });
       if (patchRes.ok) {
         const updated = await patchRes.json();
-        setUser(updated.user);
         localStorage.setItem('user', JSON.stringify(updated.user));
       }
       setAvatarUploading(false);

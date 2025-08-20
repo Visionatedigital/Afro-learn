@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import TopBar from '../components/layout/TopBar';
 
 // Mock user data
@@ -967,9 +967,9 @@ function Groups({ onGroupSelect }) {
     return JSON.parse(localStorage.getItem('user') || '{}');
   }
 
-  const fetchGroups = () => {
-    const token = getToken();
-    const user = getUser();
+  const fetchGroups = useCallback(() => {
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
     if (!token || !user || !user.id) {
       setGroups([]);
       setLoading(false);
@@ -993,18 +993,18 @@ function Groups({ onGroupSelect }) {
         setError(err.message);
         setLoading(false);
       });
-  };
+  }, []);
 
   useEffect(() => {
-    const token = getToken();
-    const user = getUser();
-    if (token && user && user.id) {
-      fetchGroups();
-    } else {
+    const token = localStorage.getItem('token');
+    const user = JSON.parse(localStorage.getItem('user') || '{}');
+    if (!token || !user || !user.id) {
       setGroups([]);
       setLoading(false);
+      return;
     }
-  }, []);
+    fetchGroups();
+  }, [fetchGroups]);
 
   useEffect(() => {
     // Debug print: log groups and current user

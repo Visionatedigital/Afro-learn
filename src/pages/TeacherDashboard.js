@@ -114,16 +114,10 @@ export default function TeacherDashboard() {
 
   // const navigate = useNavigate(); // not used
 
-  // Mock students for class details
-  const mockStudents = [
-    { id: 1, name: 'Amina', progress: 85, attendance: 96, lastActivity: 'Today' },
-    { id: 2, name: 'Samuel', progress: 72, attendance: 89, lastActivity: 'Yesterday' },
-    { id: 3, name: 'Fatima', progress: 91, attendance: 99, lastActivity: 'Today' },
-    { id: 4, name: 'Kwame', progress: 67, attendance: 82, lastActivity: '2 days ago' },
-  ];
+  // Note: removed unused mockStudents to satisfy lint
 
   // Compute summary stats
-  const totalStudents = mockStudents.length;
+  // const totalStudents = mockStudents.length;
   // const avgProgress = Math.round(mockStudents.reduce((sum, s) => sum + s.progress, 0) / totalStudents);
   // const topPerformer = mockStudents.reduce((top, s) => (s.progress > top.progress ? s : top), mockStudents[0]);
 
