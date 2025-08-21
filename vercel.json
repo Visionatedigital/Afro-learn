@@ -1,12 +1,6 @@
-{
-  "version": 2,
-  "buildCommand": "npm run build",
-  "outputDirectory": "build",
-  "installCommand": "npm install --legacy-peer-deps",
+﻿{
   "rewrites": [
-    {
-      "source": "/api/(.*)",
-      "destination": "https://polo-speeds-accomplish-mens.trycloudflare.com/api/$1"
-    }
+    { "source": "/api/:path*", "destination": "https://afro-learn-production.up.railway.app/api/:path*" },
+    { "source": "/health", "destination": "https://afro-learn-production.up.railway.app/health" }
   ]
 }
